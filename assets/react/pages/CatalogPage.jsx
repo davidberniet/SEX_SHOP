@@ -4,7 +4,7 @@ import { ProductCard } from "../components/ProductCard";
 import { useApp } from "../context/AppContext";
 import { PRODUCTS, CATEGORIES } from "../data/products";
 
-export function CatalogPage() {
+export function CatalogPage({ onNavigate }) {
     const [selectedCategory, setSelectedCategory] = useState("Todos");
     const { addToCart } = useApp();
 
@@ -41,6 +41,7 @@ export function CatalogPage() {
                         key={product.id}
                         product={product}
                         onAddToCart={addToCart}
+                        onClick={() => onNavigate('product', product.id)}
                     />
                 ))}
             </div>

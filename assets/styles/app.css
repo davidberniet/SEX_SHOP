@@ -2,10 +2,10 @@
 
 @theme {
     --color-primary: #ec1380;
-    --color-background-light: #f8f6f7;
-    --color-background-dark: #181114;
-    --color-surface-dark: #241a1f;
-    --color-border-dark: #392830;
+    --color-background-light: #000000;
+    --color-background-dark: #000000;
+    --color-surface-dark: #0a0a0a;
+    --color-border-dark: #222222;
     --font-display: "Plus Jakarta Sans", sans-serif;
     --radius-DEFAULT: 0.5rem;
     --radius-lg: 1rem;

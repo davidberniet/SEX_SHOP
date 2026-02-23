@@ -10,22 +10,53 @@ import Categories from './react/components/home/Categories';
 import Bestsellers from './react/components/home/Bestsellers';
 import Education from './react/components/home/Education';
 import Newsletter from './react/components/home/Newsletter';
+import { CatalogPage } from './react/pages/CatalogPage';
+import { ProductPage } from './react/pages/ProductPage';
+import { ProfilePage } from './react/pages/ProfilePage';
+import { ContactPage } from './react/pages/ContactPage';
+import { AppProvider } from './react/context/AppContext';
+import { useState } from 'react';
 
-function Home() {
+function App() {
+    const [route, setRoute] = useState('home');
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    const navigate = (newRoute, params = null) => {
+        setRoute(newRoute);
+        if (newRoute === 'product' && params) {
+            setSelectedProduct(params);
+        }
+        window.scrollTo(0, 0);
+    };
+
     return (
-        <>
-            <Header />
+        <AppProvider>
+            <Header onNavigate={navigate} />
             <main className="flex-1">
-                <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8 py-6">
-                    <Hero />
-                    <Categories />
-                    <Bestsellers />
-                    <Education />
-                    <Newsletter />
-                </div>
+                {route === 'home' && (
+                    <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8 py-6">
+                        <Hero />
+                        <Categories />
+                        <Bestsellers />
+                        <Education />
+                        <Newsletter />
+                    </div>
+                )}
+                {route === 'catalog' && (
+                    <CatalogPage onNavigate={navigate} />
+                )}
+                {route === 'product' && (
+                    <ProductPage productId={selectedProduct} onBack={() => navigate('catalog')} />
+                )}
+                {route === 'profile' && (
+                    <ProfilePage />
+                )}
+                {route === 'contact' && (
+                    <ContactPage />
+                )}
             </main>
             <Footer />
-        </>
+        </AppProvider>
     );
 }
 
@@ -35,7 +66,7 @@ const rootElement = document.getElementById('react-app');
 
 if (rootElement) {
     const root = createRoot(rootElement);
-    root.render(<Home />);
+    root.render(<App />);
     console.log('React montado con éxito en #react-app');
 } else {
     console.error('ERROR CRÍTICO: No se encontró el elemento #react-app en el DOM');
