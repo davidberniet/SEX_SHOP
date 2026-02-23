@@ -14,15 +14,18 @@ import { CatalogPage } from './react/pages/CatalogPage';
 import { ProductPage } from './react/pages/ProductPage';
 import { ProfilePage } from './react/pages/ProfilePage';
 import { ContactPage } from './react/pages/ContactPage';
+import { CartDrawer } from './react/components/layout/CartDrawer';
 import { AppProvider } from './react/context/AppContext';
 import { useState } from 'react';
 
 function App() {
     const [route, setRoute] = useState('home');
+    const [routeParams, setRouteParams] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     const navigate = (newRoute, params = null) => {
         setRoute(newRoute);
+        setRouteParams(params);
         if (newRoute === 'product' && params) {
             setSelectedProduct(params);
         }
@@ -43,7 +46,7 @@ function App() {
                     </div>
                 )}
                 {route === 'catalog' && (
-                    <CatalogPage onNavigate={navigate} />
+                    <CatalogPage onNavigate={navigate} routeParams={routeParams} />
                 )}
                 {route === 'product' && (
                     <ProductPage productId={selectedProduct} onBack={() => navigate('catalog')} />
@@ -56,6 +59,7 @@ function App() {
                 )}
             </main>
             <Footer />
+            <CartDrawer />
         </AppProvider>
     );
 }
