@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #ec1380;
+    --color-background-light: #f8f6f7;
+    --color-background-dark: #181114;
+    --color-surface-dark: #241a1f;
+    --color-border-dark: #392830;
+    --font-display: "Plus Jakarta Sans", sans-serif;
+    --radius-DEFAULT: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+}
+
+body {
+    @apply bg-background-light text-slate-900 antialiased min-h-screen flex flex-col overflow-x-hidden;
+}
+
+.dark body {
+    @apply bg-background-dark text-slate-100;
+}

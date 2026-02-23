@@ -1,0 +1,7 @@
+pentatrion_vite:
+    public_directory: public
+    build_directory: build
+    proxy_origin: http://127.0.0.1:5173
+    throw_on_missing_entry: true
+    script_attributes:
+        defer: true
