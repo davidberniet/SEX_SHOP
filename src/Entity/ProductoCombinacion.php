@@ -122,4 +122,44 @@ class ProductoCombinacion
 
         return $this;
     }
+
+    /**
+     * Verifica si hay stock disponible
+     */
+    public function tieneStock(): bool
+    {
+        return $this->stock > 0;
+    }
+
+    /**
+     * Reduce el stock de inventario
+     */
+    public function reducirStock(int $cantidad = 1): bool
+    {
+        if ($this->stock >= $cantidad) {
+            $this->stock -= $cantidad;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Incrementa el stock (devoluciones, etc)
+     */
+    public function incrementarStock(int $cantidad = 1): void
+    {
+        $this->stock += $cantidad;
+    }
+
+    /**
+     * Obtiene la descripción de la combinación (ej: "Rojo - Talla M")
+     */
+    public function getDescripcion(): string
+    {
+        $valores = $this->valoresCombinacion
+            ->map(fn(CombinacionValor $v) => $v->getValor())
+            ->toArray();
+        
+        return implode(' - ', $valores) ?: 'Combinación ' . $this->id;
+    }
 }

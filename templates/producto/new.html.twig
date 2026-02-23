@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Producto{% endblock %}
+
+{% block body %}
+    <main class="flex-1 bg-gradient-to-b from-background-dark to-surface-dark">
+        <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+            <!-- Encabezado -->
+            <div class="mb-8">
+                <a href="{{ path('app_producto_index') }}" class="inline-flex items-center gap-2 text-primary hover:text-pink-400 transition-colors mb-4">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    Volver a productos
+                </a>
+                <h1 class="text-3xl font-bold tracking-tight">Crear Nuevo Producto</h1>
+            </div>
+
+            <!-- Formulario -->
+            <div class="rounded-lg border border-border-dark bg-surface-dark p-8 shadow" {{ stimulus_controller('collection') }}>
+                {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+                    {{ include('producto/_form.html.twig') }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </main>
+{% endblock %}

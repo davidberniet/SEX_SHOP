@@ -22,6 +22,12 @@ class Producto
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $descripcionGeneral = null;
 
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    private ?string $precio = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imagenUrl = null;
+
     #[ORM\Column]
     private ?bool $activo = null;
 
@@ -72,6 +78,30 @@ class Producto
     public function setDescripcionGeneral(?string $descripcionGeneral): static
     {
         $this->descripcionGeneral = $descripcionGeneral;
+
+        return $this;
+    }
+
+    public function getPrecio(): ?string
+    {
+        return $this->precio;
+    }
+
+    public function setPrecio(string $precio): static
+    {
+        $this->precio = $precio;
+
+        return $this;
+    }
+
+    public function getImagenUrl(): ?string
+    {
+        return $this->imagenUrl;
+    }
+
+    public function setImagenUrl(?string $imagenUrl): static
+    {
+        $this->imagenUrl = $imagenUrl;
 
         return $this;
     }
