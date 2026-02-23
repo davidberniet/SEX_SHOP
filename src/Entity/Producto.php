@@ -159,4 +159,10 @@ class Producto
 
         return $this;
     }
+
+    public function getPrecio(): string
+    {
+        $primeraCombinacion = $this->combinaciones->first();
+        return $primeraCombinacion ? (string) $primeraCombinacion->getPrecio() : '0.00';
+    }
 }
