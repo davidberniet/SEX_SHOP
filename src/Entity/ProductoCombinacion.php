@@ -19,25 +19,32 @@ class ProductoCombinacion
     #[ORM\Column(length: 100)]
     private ?string $sku = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $precio = null;
+    // Recuperado: precioEspecifico (ahora permite null)
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    private ?string $precioEspecifico = null;
 
+    // Recuperado: cantidad
     #[ORM\Column]
-    private ?int $stock = null;
+    private ?int $cantidad = null;
+
+    // Recuperado: activo (por defecto a true)
+    #[ORM\Column (nullable: true, options: ['default' => true])]
+    private ?bool $activo = true;
 
     #[ORM\ManyToOne(inversedBy: 'combinaciones')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Producto $producto = null;
 
+    // Recuperado: combinacionValores
     /**
      * @var Collection<int, CombinacionValor>
      */
-    #[ORM\OneToMany(targetEntity: CombinacionValor::class, mappedBy: 'combinacion', orphanRemoval: true)]
-    private Collection $valoresCombinacion;
+    #[ORM\OneToMany(targetEntity: CombinacionValor::class, mappedBy: 'combinacion', orphanRemoval: true, cascade: ['persist'])]
+    private Collection $combinacionValores;
 
     public function __construct()
     {
-        $this->valoresCombinacion = new ArrayCollection();
+        $this->combinacionValores = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,31 +60,39 @@ class ProductoCombinacion
     public function setSku(string $sku): static
     {
         $this->sku = $sku;
-
         return $this;
     }
 
-    public function getPrecio(): ?string
+    public function getPrecioEspecifico(): ?string
     {
-        return $this->precio;
+        return $this->precioEspecifico;
     }
 
-    public function setPrecio(string $precio): static
+    public function setPrecioEspecifico(?string $precioEspecifico): static
     {
-        $this->precio = $precio;
-
+        $this->precioEspecifico = $precioEspecifico;
         return $this;
     }
 
-    public function getStock(): ?int
+    public function getCantidad(): ?int
     {
-        return $this->stock;
+        return $this->cantidad;
     }
 
-    public function setStock(int $stock): static
+    public function setCantidad(int $cantidad): static
     {
-        $this->stock = $stock;
+        $this->cantidad = $cantidad;
+        return $this;
+    }
 
+    public function getActivo(): ?bool
+    {
+        return $this->activo;
+    }
+
+    public function setActivo(bool $activo): static
+    {
+        $this->activo = $activo;
         return $this;
     }
 
@@ -89,74 +104,60 @@ class ProductoCombinacion
     public function setProducto(?Producto $producto): static
     {
         $this->producto = $producto;
-
         return $this;
     }
 
     /**
      * @return Collection<int, CombinacionValor>
      */
-    public function getValoresCombinacion(): Collection
+    public function getCombinacionValores(): Collection
     {
-        return $this->valoresCombinacion;
+        return $this->combinacionValores;
     }
 
-    public function addValoresCombinacion(CombinacionValor $valoresCombinacion): static
+    public function addCombinacionValor(CombinacionValor $combinacionValor): static
     {
-        if (!$this->valoresCombinacion->contains($valoresCombinacion)) {
-            $this->valoresCombinacion->add($valoresCombinacion);
-            $valoresCombinacion->setCombinacion($this);
+        if (!$this->combinacionValores->contains($combinacionValor)) {
+            $this->combinacionValores->add($combinacionValor);
+            $combinacionValor->setCombinacion($this);
         }
 
         return $this;
     }
 
-    public function removeValoresCombinacion(CombinacionValor $valoresCombinacion): static
+    public function removeCombinacionValor(CombinacionValor $combinacionValor): static
     {
-        if ($this->valoresCombinacion->removeElement($valoresCombinacion)) {
-            // set the owning side to null (unless already changed)
-            if ($valoresCombinacion->getCombinacion() === $this) {
-                $valoresCombinacion->setCombinacion(null);
+        if ($this->combinacionValores->removeElement($combinacionValor)) {
+            if ($combinacionValor->getCombinacion() === $this) {
+                $combinacionValor->setCombinacion(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * Verifica si hay stock disponible
-     */
     public function tieneStock(): bool
     {
-        return $this->stock > 0;
+        return $this->cantidad > 0;
     }
 
-    /**
-     * Reduce el stock de inventario
-     */
-    public function reducirStock(int $cantidad = 1): bool
+    public function reducirStock(int $cant = 1): bool
     {
-        if ($this->stock >= $cantidad) {
-            $this->stock -= $cantidad;
+        if ($this->cantidad >= $cant) {
+            $this->cantidad -= $cant;
             return true;
         }
         return false;
     }
 
-    /**
-     * Incrementa el stock (devoluciones, etc)
-     */
-    public function incrementarStock(int $cantidad = 1): void
+    public function incrementarStock(int $cant = 1): void
     {
-        $this->stock += $cantidad;
+        $this->cantidad += $cant;
     }
 
-    /**
-     * Obtiene la descripción de la combinación (ej: "Rojo - Talla M")
-     */
     public function getDescripcion(): string
     {
-        $valores = $this->valoresCombinacion
+        $valores = $this->combinacionValores
             ->map(fn(CombinacionValor $v) => $v->getValor())
             ->toArray();
         

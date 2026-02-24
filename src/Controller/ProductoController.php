@@ -7,9 +7,12 @@ use App\Form\ProductoType;
 use App\Repository\ProductoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/producto')]
 final class ProductoController extends AbstractController
@@ -64,13 +67,34 @@ final class ProductoController extends AbstractController
     }
 
     #[Route('/new', name: 'app_producto_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $producto = new Producto();
         $form = $this->createForm(ProductoType::class, $producto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            /** @var UploadedFile $imagenFile */
+            $imagenFile = $form->get('imagenUrl')->getData();
+
+            // Lógica para subir la imagen si se ha seleccionado una
+            if ($imagenFile) {
+                $originalFilename = pathinfo($imagenFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imagenFile->guessExtension();
+
+                try {
+                    $imagenFile->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads/productos',
+                        $newFilename
+                    );
+                    $producto->setImagenUrl('/uploads/productos/'.$newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Hubo un error al subir la imagen.');
+                }
+            }
+
             $entityManager->persist($producto);
             $entityManager->flush();
 
@@ -93,12 +117,33 @@ final class ProductoController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_producto_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Producto $producto, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Producto $producto, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ProductoType::class, $producto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            /** @var UploadedFile $imagenFile */
+            $imagenFile = $form->get('imagenUrl')->getData();
+
+            // Si suben una nueva imagen al editar, la procesamos y sobreescribimos la ruta
+            if ($imagenFile) {
+                $originalFilename = pathinfo($imagenFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imagenFile->guessExtension();
+
+                try {
+                    $imagenFile->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads/productos',
+                        $newFilename
+                    );
+                    $producto->setImagenUrl('/uploads/productos/'.$newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Hubo un error al subir la nueva imagen.');
+                }
+            }
+
             $entityManager->flush();
 
             $this->addFlash('success', 'Producto actualizado exitosamente.');

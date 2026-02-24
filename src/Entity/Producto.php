@@ -38,13 +38,13 @@ class Producto
     /**
      * @var Collection<int, Atributo>
      */
-    #[ORM\OneToMany(targetEntity: Atributo::class, mappedBy: 'producto', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Atributo::class, mappedBy: 'producto', orphanRemoval: true, cascade: ['persist'])]
     private Collection $atributos;
 
     /**
      * @var Collection<int, ProductoCombinacion>
      */
-    #[ORM\OneToMany(targetEntity: ProductoCombinacion::class, mappedBy: 'producto', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: ProductoCombinacion::class, mappedBy: 'producto', orphanRemoval: true, cascade: ['persist'])]
     private Collection $combinaciones;
 
     public function __construct()

@@ -76,7 +76,7 @@ class ProductoRepository extends ServiceEntityRepository
         // Búsqueda por nombre
         if (!empty($criteria['nombre'])) {
             $qb->andWhere('p.nombre LIKE :nombre')
-               ->setParameter('nombre', '%' . $criteria['nombre'] . '%');
+               ->setParameter('nombre', '%' . mb_strtolower($criteria['nombre']) . '%');
         }
 
         // Filtro por categoría

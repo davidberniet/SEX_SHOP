@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ atributo.nombre }}{% endblock %}
+
+{% block body %}
+    <main class="flex-1 bg-gradient-to-b from-background-dark to-surface-dark">
+        <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+            
+            <div class="mb-6">
+                <a href="{{ path('app_admin_dashboard') }}" class="inline-flex items-center gap-2 rounded-lg bg-slate-900/50 px-4 py-2 text-sm font-medium text-slate-300 border border-border-dark hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all shadow-sm">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">grid_view</span>
+                    Volver al Panel de Administración
+                </a>
+            </div>
+
+            <div class="mb-8 flex items-start justify-between">
+                <div>
+                    <a href="{{ path('app_atributo_index') }}" class="inline-flex items-center gap-2 text-primary hover:text-pink-400 transition-colors mb-4">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Volver a atributos
+                    </a>
+                    <h1 class="text-3xl font-bold tracking-tight">{{ atributo.nombre }}</h1>
+                </div>
+                <a href="{{ path('app_atributo_edit', {'id': atributo.id}) }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+                    <span class="material-symbols-outlined">edit</span>
+                    Editar
+                </a>
+            </div>
+
+            <div class="space-y-6">
+                <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                    <h2 class="text-lg font-semibold mb-4">Información General</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">ID</p>
+                            <p class="mt-1">{{ atributo.id }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Nombre</p>
+                            <p class="mt-1 text-lg font-semibold">{{ atributo.nombre }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                    <h2 class="text-lg font-semibold mb-4">Valores del Atributo ({{ atributo.valores|length }})</h2>
+                    {% if atributo.valores|length > 0 %}
+                        <div class="space-y-2">
+                            {% for valor in atributo.valores %}
+                                <div class="rounded bg-slate-900/30 px-4 py-3 flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                                    <span>{{ valor.valor }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-slate-400">Sin valores definidos</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="mt-8 rounded-lg border border-red-900/30 bg-red-900/10 p-6">
+                <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined">warning</span>
+                    Zona de peligro
+                </h3>
+                <p class="text-sm text-slate-400 mb-4">Esta acción no se puede deshacer. Elimina el atributo permanentemente.</p>
+                <form method="post" action="{{ path('app_atributo_delete', {'id': atributo.id}) }}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este atributo?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ atributo.id) }}" />
+                    <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-red-600/90 px-4 py-2 font-semibold text-white hover:bg-red-700 transition-colors">
+                        <span class="material-symbols-outlined">delete</span>
+                        Eliminar Atributo
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

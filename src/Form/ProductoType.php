@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProductoType extends AbstractType
 {
@@ -24,8 +26,8 @@ class ProductoType extends AbstractType
                 'label' => 'Nombre del Producto',
                 'attr' => ['placeholder' => 'Ej: Vibrador de Lujo'],
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'El nombre es obligatorio']),
-                    new Assert\Length(['min' => 3, 'max' => 255]),
+                    new Assert\NotBlank(message: 'El nombre es obligatorio'),
+                    new Assert\Length(min: 3, max: 255),
                 ],
             ])
             ->add('descripcionGeneral', TextareaType::class, [
@@ -33,7 +35,7 @@ class ProductoType extends AbstractType
                 'required' => false,
                 'attr' => ['placeholder' => 'Describe el producto en detalle...', 'rows' => 4],
                 'constraints' => [
-                    new Assert\Length(['max' => 5000]),
+                    new Assert\Length(max: 5000),
                 ],
             ])
             ->add('precio', MoneyType::class, [
@@ -41,17 +43,25 @@ class ProductoType extends AbstractType
                 'currency' => 'EUR',
                 'attr' => ['placeholder' => '0.00'],
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'El precio es obligatorio']),
-                    new Assert\Positive(['message' => 'El precio debe ser mayor a 0']),
+                    new Assert\NotBlank(message: 'El precio es obligatorio'),
+                    new Assert\Positive(message: 'El precio debe ser mayor a 0'),
                 ],
             ])
-            ->add('imagenUrl', TextType::class, [
-                'label' => 'URL de Imagen Principal',
+            ->add('imagenUrl', FileType::class, [
+                'label' => 'Subir Imagen',
+                'mapped' => false,
                 'required' => false,
-                'attr' => ['placeholder' => 'https://ejemplo.com/imagen.jpg'],
                 'constraints' => [
-                    new Assert\Length(['max' => 255]),
-                    new Assert\Url(['requireProtocol' => false]),
+                    // ¡OJO AQUÍ! Sin corchetes [] y usando dos puntos :
+                    new File(
+                        maxSize: '2M',
+                        mimeTypes: [
+                            'image/jpeg',
+                            'image/png',
+                            'image/webp',
+                        ],
+                        mimeTypesMessage: 'Por favor, sube una imagen válida (JPEG, PNG o WEBP)'
+                    )
                 ],
             ])
             ->add('categoria', EntityType::class, [
@@ -60,7 +70,7 @@ class ProductoType extends AbstractType
                 'choice_label' => 'nombre',
                 'placeholder' => 'Selecciona una categoría',
                 'constraints' => [
-                    new Assert\NotNull(['message' => 'Debes seleccionar una categoría']),
+                    new Assert\NotNull(message: 'Debes seleccionar una categoría'),
                 ],
             ])
             ->add('activo', CheckboxType::class, [
