@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Variación{% endblock %}
+
+{% block body %}
+    <main class="flex-1 bg-gradient-to-b from-background-dark to-surface-dark">
+        <div class="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
+            <!-- Encabezado -->
+            <div class="mb-8">
+                <a href="{{ path('app_producto_combinacion_show', {'id': combinacion.id}) }}" class="inline-flex items-center gap-2 text-primary hover:text-pink-400 transition-colors mb-4">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    Volver
+                </a>
+                <h1 class="text-3xl font-bold tracking-tight">Editar Variación</h1>
+                <p class="mt-2 text-slate-400">{{ combinacion.descripcion }}</p>
+            </div>
+
+            <!-- Formulario -->
+            <div class="rounded-lg border border-border-dark bg-surface-dark p-8 shadow">
+                {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+
+                <div>
+                    {{ form_label(form.sku, 'SKU (Código Único)', {'label_attr': {'class': 'block text-sm font-semibold text-slate-200 mb-2'}}) }}
+                    {{ form_widget(form.sku, {'attr': {'class': 'w-full rounded-lg border border-border-dark bg-slate-900/50 px-4 py-2 text-slate-100 font-mono focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20'}}) }}
+                    {{ form_errors(form.sku) }}
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        {{ form_label(form.precioEspecifico, 'Precio Especial', {'label_attr': {'class': 'block text-sm font-semibold text-slate-200 mb-2'}}) }}
+                        {{ form_widget(form.precioEspecifico, {'attr': {'class': 'w-full rounded-lg border border-border-dark bg-slate-900/50 px-4 py-2 text-slate-100 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20'}}) }}
+                        {{ form_errors(form.precioEspecifico) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.cantidad, 'Stock Disponible', {'label_attr': {'class': 'block text-sm font-semibold text-slate-200 mb-2'}}) }}
+                        {{ form_widget(form.cantidad, {'attr': {'class': 'w-full rounded-lg border border-border-dark bg-slate-900/50 px-4 py-2 text-slate-100 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20'}}) }}
+                        {{ form_errors(form.cantidad) }}
+                    </div>
+                </div>
+
+                <!-- Atributos -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-4">Valores de Atributos</label>
+                    <div id="combinacion-valores" class="space-y-3">
+                        {% for valorField in form.combinacionValores %}
+                            <div class="rounded-lg border border-border-dark bg-slate-900/30 p-4">
+                                {{ form_widget(valorField) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div>
+                    {{ form_label(form.activo, 'Variación Activa', {'label_attr': {'class': 'flex items-center gap-2 text-sm font-semibold text-slate-200 cursor-pointer'}}) }}
+                    {{ form_widget(form.activo, {'attr': {'class': 'rounded'}}) }}
+                    {{ form_errors(form.activo) }}
+                </div>
+
+                <!-- Acciones -->
+                <div class="flex gap-3 pt-6 border-t border-border-dark">
+                    <button type="submit" class="rounded-lg bg-primary px-6 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+                        Actualizar Variación
+                    </button>
+                    <a href="{{ path('app_producto_combinacion_show', {'id': combinacion.id}) }}" class="rounded-lg border border-border-dark bg-slate-900/30 px-6 py-2 font-semibold text-slate-300 hover:bg-slate-900/50 transition-colors">
+                        Cancelar
+                    </a>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </main>
+{% endblock %}

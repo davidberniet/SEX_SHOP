@@ -19,13 +19,13 @@ class Atributo
     private ?string $nombre = null;
 
     #[ORM\ManyToOne(inversedBy: 'atributos')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Producto $producto = null;
 
     /**
      * @var Collection<int, AtributoValor>
      */
-    #[ORM\OneToMany(targetEntity: AtributoValor::class, mappedBy: 'atributo', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: AtributoValor::class, mappedBy: 'atributo', orphanRemoval: true, cascade: ['persist'])]
     private Collection $valores;
 
     public function __construct()

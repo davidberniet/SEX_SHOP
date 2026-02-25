@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ producto.nombre }}{% endblock %}
+
+{% block body %}
+    <main class="flex-1 bg-gradient-to-b from-background-dark to-surface-dark">
+        <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+            <!-- Encabezado -->
+            <div class="mb-8 flex items-start justify-between">
+                <div>
+                    <a href="{{ path('app_producto_index') }}" class="inline-flex items-center gap-2 text-primary hover:text-pink-400 transition-colors mb-4">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Volver a productos
+                    </a>
+                    <h1 class="text-3xl font-bold tracking-tight">{{ producto.nombre }}</h1>
+                </div>
+                <a href="{{ path('app_producto_edit', {'id': producto.id}) }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+                    <span class="material-symbols-outlined">edit</span>
+                    Editar
+                </a>
+            </div>
+
+            <!-- Grid principal -->
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                <!-- Imagen (Sidebar izquierdo) -->
+                <div class="md:col-span-1">
+                    <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                        {% if producto.imagenUrl %}
+                            <img src="{{ producto.imagenUrl }}" alt="{{ producto.nombre }}" class="w-full rounded-lg mb-4 object-cover h-80">
+                        {% else %}
+                            <div class="w-full rounded-lg bg-slate-900/50 mb-4 flex items-center justify-center h-80">
+                                <span class="material-symbols-outlined text-slate-600" style="font-size: 60px;">image</span>
+                            </div>
+                        {% endif %}
+
+                        <!-- Precio -->
+                        <div class="text-center border-t border-border-dark pt-4">
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Precio Base</p>
+                            <p class="text-2xl font-bold text-primary">€{{ producto.precio }}</p>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="text-center border-t border-border-dark pt-4 mt-4">
+                            {% if producto.activo %}
+                                <span class="inline-flex items-center gap-1 rounded-full bg-green-900/30 px-3 py-1 text-xs font-medium text-green-400">
+                                    <span class="material-symbols-outlined" style="font-size: 14px;">check_circle</span>
+                                    Activo
+                                </span>
+                            {% else %}
+                                <span class="inline-flex items-center gap-1 rounded-full bg-slate-700/30 px-3 py-1 text-xs font-medium text-slate-400">
+                                    <span class="material-symbols-outlined" style="font-size: 14px;">cancel</span>
+                                    Inactivo
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido principal (2 columnas) -->
+                <div class="md:col-span-2 space-y-6">
+                    <!-- Información básica -->
+                    <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                        <h2 class="text-lg font-semibold mb-4">Información General</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">ID</p>
+                                <p class="mt-1">{{ producto.id }}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Categoría</p>
+                                <p class="mt-1">
+                                    {% if producto.categoria %}
+                                        {{ producto.categoria.nombre }}
+                                    {% else %}
+                                        <span class="text-slate-600">Sin categoría</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Descripción</p>
+                                <p class="mt-2 text-slate-300 leading-relaxed">{{ producto.descripcionGeneral ?: 'Sin descripción' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Atributos -->
+                    {% if producto.atributos|length > 0 %}
+                        <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                            <h2 class="text-lg font-semibold mb-4">Atributos ({{ producto.atributos|length }})</h2>
+                            <div class="space-y-2">
+                                {% for atributo in producto.atributos %}
+                                    <div class="flex items-center justify-between rounded bg-slate-900/30 p-3">
+                                        <span>{{ atributo.nombre }}</span>
+                                        <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">{{ atributo.tipo }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <!-- Combinaciones con Inventario -->
+                    <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                        <div class="flex items-start justify-between mb-4">
+                            <h2 class="text-lg font-semibold">Variaciones y Stock ({{ producto.combinaciones|length }})</h2>
+                            <a href="{{ path('app_producto_combinaciones', {'id': producto.id}) }}" class="inline-flex items-center gap-2 rounded-lg bg-primary/20 px-3 py-1 text-sm font-semibold text-primary hover:bg-primary/30 transition-colors">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
+                                Gestionar
+                            </a>
+                        </div>
+                        {% if producto.combinaciones|length > 0 %}
+                            <div class="space-y-3">
+                                {% for combinacion in producto.combinaciones %}
+                                    <div class="rounded-lg bg-slate-900/30 p-4 border border-border-dark/50 cursor-pointer hover:border-primary/50 transition-colors" onclick="window.location.href='{{ path('app_producto_combinacion_show', {'id': combinacion.id}) }}'">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+                                                <p class="font-semibold">{{ combinacion.descripcion }}</p>
+                                                <p class="text-sm text-slate-400 mt-1">SKU: {{ combinacion.sku }}</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-sm text-slate-400">Precio</p>
+                                                <p class="font-bold text-primary">€{{ combinacion.precioEspecifico ?: producto.precio }}</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Stock -->
+                                        <div class="mt-3 flex items-center gap-3">
+                                            {% if combinacion.tieneStock() %}
+                                                <span class="inline-flex items-center gap-1 rounded-full bg-green-900/30 px-3 py-1 text-xs font-medium text-green-400">
+                                                    <span class="material-symbols-outlined" style="font-size: 14px;">check_circle</span>
+                                                    {{ combinacion.cantidad }} en stock
+                                                </span>
+                                            {% else %}
+                                                <span class="inline-flex items-center gap-1 rounded-full bg-red-900/30 px-3 py-1 text-xs font-medium text-red-400">
+                                                    <span class="material-symbols-outlined" style="font-size: 14px;">block</span>
+                                                    Agotado
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-slate-400 text-center py-4">Sin variaciones. <a href="{{ path('app_producto_combinaciones', {'id': producto.id}) }}" class="text-primary hover:text-pink-400">Crear primera</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de peligro -->
+            <div class="mt-8 rounded-lg border border-red-900/30 bg-red-900/10 p-6">
+                <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined">warning</span>
+                    Zona de peligro
+                </h3>
+                <p class="text-sm text-slate-400 mb-4">Esta acción no se puede deshacer. Elimina el producto permanentemente.</p>
+                {{ include('producto/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </main>
+{% endblock %}
