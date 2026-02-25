@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/producto-combinacion')]
+#[Route('/admin/producto-combinacion')]
 class ProductoCombinacionController extends AbstractController
 {
     #[Route('/producto/{id}/combinaciones', name: 'app_producto_combinaciones', methods: ['GET'])]
