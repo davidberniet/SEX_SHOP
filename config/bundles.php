@@ -13,9 +13,5 @@ return [
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
-<<<<<<< HEAD
     // SymfonyCasts\Bundle\VerifyEmail\SymfonyCastsVerifyEmailBundle::class => ['all' => true],
-=======
-    Pentatrion\ViteBundle\PentatrionViteBundle::class => ['all' => true],
->>>>>>> 03e4ee9c14773ea3c8502f3f7f4eae498d46ef09
 ];
