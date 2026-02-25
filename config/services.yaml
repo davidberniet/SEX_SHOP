@@ -19,13 +19,10 @@ services:
     App\:
         resource: '../src/'
         exclude:
-            - '../src/Security/EmailVerifier.php'
-            - '../src/Controller/RegistrationController.php'
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    # Deshabilitar EmailVerifier por ahora (bundle falta)
-    App\Security\EmailVerifier:
-        public: false
-        autowire: false
