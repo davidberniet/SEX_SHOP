@@ -187,9 +187,18 @@ class Producto
         return $this;
     }
 
-    public function getPrecio(): string
+    public function getPrecio(): ?string
     {
+        // 1. Cogemos la primera combinación si la hay
         $primeraCombinacion = $this->combinaciones->first();
-        return $primeraCombinacion ? (string) $primeraCombinacion->getPrecio() : '0.00';
+        
+        // 2. Si hay combinación Y tiene un precio específico rellenado, devolvemos ese
+        if ($primeraCombinacion && $primeraCombinacion->getPrecioEspecifico()) {
+            return (string) $primeraCombinacion->getPrecioEspecifico();
+        }
+
+        // 3. En cualquier otro caso (no hay combinaciones o el precio especial está vacío), 
+        // devolvemos el precio base original del producto
+        return $this->precio;
     }
 }

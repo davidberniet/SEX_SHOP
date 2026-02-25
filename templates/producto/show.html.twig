@@ -26,7 +26,7 @@
                 <div class="md:col-span-1">
                     <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
                         {% if producto.imagenUrl %}
-                            <img src="{{ producto.imagenUrl }}" alt="{{ producto.nombre }}" class="w-full rounded-lg mb-4 object-cover h-80">
+                            <img src="{{ producto.imagenUrl }}" alt="{{ producto.nombre }}" class="w-full h-auto object-contain rounded-lg mb-4">
                         {% else %}
                             <div class="w-full rounded-lg bg-slate-900/50 mb-4 flex items-center justify-center h-80">
                                 <span class="material-symbols-outlined text-slate-600" style="font-size: 60px;">image</span>
