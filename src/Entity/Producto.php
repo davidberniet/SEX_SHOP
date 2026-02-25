@@ -82,10 +82,7 @@ class Producto
         return $this;
     }
 
-    public function getPrecio(): ?string
-    {
-        return $this->precio;
-    }
+    
 
     public function setPrecio(string $precio): static
     {
