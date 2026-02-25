@@ -29,7 +29,7 @@ const Education = () => {
                             <span className="text-sm text-slate-300"><strong>Expert Guides:</strong> Educational resources to help you explore safely.</span>
                         </li>
                     </ul>
-                    <a className="inline-flex items-center gap-2 font-bold text-primary hover:underline" href="#">
+                    <a className="inline-flex items-center gap-2 font-bold text-primary hover:underline cursor-pointer" onClick={(e) => e.preventDefault()}>
                         Read our Wellness Guide
                         <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
                     </a>

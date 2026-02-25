@@ -5,7 +5,7 @@ const Categories = () => {
         <section className="mt-16">
             <div className="flex items-center justify-between px-2 mb-6">
                 <h2 className="text-2xl font-bold tracking-tight text-white">Featured Categories</h2>
-                <a className="group flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80" href="#">
+                <a className="group flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 cursor-pointer" onClick={(e) => e.preventDefault()}>
                     View All
                     <span className="material-symbols-outlined transition-transform group-hover:translate-x-1" style={{ fontSize: '18px' }}>arrow_forward</span>
                 </a>
@@ -13,7 +13,7 @@ const Categories = () => {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {/* Card 1 */}
-                <a className="group relative block aspect-[4/5] overflow-hidden rounded-xl bg-surface-dark" href="#">
+                <a className="group relative block aspect-[4/5] overflow-hidden rounded-xl bg-surface-dark cursor-pointer" onClick={(e) => e.preventDefault()}>
                     <div
                         className="absolute inset-0 transition-transform duration-500 group-hover:scale-110"
                         data-alt="Elegant luxury toy in soft lighting"
@@ -27,7 +27,7 @@ const Categories = () => {
                 </a>
 
                 {/* Card 2 */}
-                <a className="group relative block aspect-[4/5] overflow-hidden rounded-xl bg-surface-dark" href="#">
+                <a className="group relative block aspect-[4/5] overflow-hidden rounded-xl bg-surface-dark cursor-pointer" onClick={(e) => e.preventDefault()}>
                     <div
                         className="absolute inset-0 transition-transform duration-500 group-hover:scale-110"
                         data-alt="Fine lace lingerie detail"
@@ -41,7 +41,7 @@ const Categories = () => {
                 </a>
 
                 {/* Card 3 */}
-                <a className="group relative block aspect-[4/5] overflow-hidden rounded-xl bg-surface-dark" href="#">
+                <a className="group relative block aspect-[4/5] overflow-hidden rounded-xl bg-surface-dark cursor-pointer" onClick={(e) => e.preventDefault()}>
                     <div
                         className="absolute inset-0 transition-transform duration-500 group-hover:scale-110"
                         data-alt="Wellness oils and candles arrangement"

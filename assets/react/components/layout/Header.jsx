@@ -14,7 +14,7 @@ const Header = ({ onNavigate = () => { } }) => {
                 <nav className="hidden md:flex items-center gap-8">
                     <a onClick={(e) => { e.preventDefault(); onNavigate('catalog'); }} className="text-sm font-medium text-slate-300 transition-colors hover:text-primary cursor-pointer">Shop</a>
                     <a onClick={(e) => { e.preventDefault(); onNavigate('contact'); }} className="text-sm font-medium text-slate-300 transition-colors hover:text-primary cursor-pointer">Contacto</a>
-                    <a className="text-sm font-medium text-slate-300 transition-colors hover:text-primary" href="#">Education</a>
+                    <a onClick={(e) => { e.preventDefault(); onNavigate('education'); }} className="text-sm font-medium text-slate-300 transition-colors hover:text-primary cursor-pointer">Education</a>
                 </nav>
                 {/* Actions */}
                 <div className="flex items-center gap-2">
