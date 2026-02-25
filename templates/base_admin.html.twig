@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Velvet & Vine - Administración{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎛️</text></svg>">
+        
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#e83e8c', // El rosa de tu panel
+                            'surface-dark': '#1e1e2d',
+                            'border-dark': '#2b2b40',
+                            'background-dark': '#151521'
+                        }
+                    }
+                }
+            }
+        </script>
+
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body class="bg-background-dark text-white min-h-screen">
+        
+        {% block body %}{% endblock %}
+        
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

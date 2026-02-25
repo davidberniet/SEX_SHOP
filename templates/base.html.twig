@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html class="dark" lang="es">
+<html lang="es" class="dark">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     
-    <title>{% block title %}Velvet & Vine - Intimacy Reimagined{% endblock %}</title>
+    <title>{% block title %}Sexo duro{% endblock %}</title>
     
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -12,74 +11,16 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#ec1380",
-                        "background-light": "#f8f6f7",
-                        "background-dark": "#181114",
-                        "surface-dark": "#241a1f",
-                        "border-dark": "#392830",
-                    },
-                    fontFamily: {
-                        "display": ["Plus Jakarta Sans", "sans-serif"]
-                    },
-                }
-            },
-        }
-    </script>
 
     {% block stylesheets %}{% endblock %}
+            {{ vite_entry_link_tags('app') }}
     {% block javascripts %}{% endblock %}
+            {{ vite_entry_script_tags('app', { dependency: 'react' }) }}
 </head>
 
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col overflow-x-hidden">
-    
-    <header class="sticky top-0 z-50 w-full border-b border-border-dark bg-background-dark/95 backdrop-blur supports-[backdrop-filter]:bg-background-dark/80">
-        <div class="mx-auto flex h-16 max-w-[960px] items-center justify-between px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary" style="font-size: 28px;">spa</span>
-                <span class="text-xl font-bold tracking-tight text-white">Velvet & Vine</span>
-            </div>
-            
-            <nav class="hidden md:flex items-center gap-8">
-                <a class="text-sm font-medium text-slate-300 transition-colors hover:text-primary" href="/">Inicio</a>
-                <a class="text-sm font-medium text-slate-300 transition-colors hover:text-primary" href="#">Catálogo</a>
-                <a class="text-sm font-medium text-slate-300 transition-colors hover:text-primary" href="#">Novedades</a>
-            </nav>
-            
-            <div class="flex items-center gap-2">
-                <button aria-label="Search" class="flex size-10 items-center justify-center rounded-lg text-slate-300 transition-colors hover:bg-surface-dark hover:text-primary">
-                    <span class="material-symbols-outlined">search</span>
-                </button>
-                <button aria-label="Cart" class="relative flex size-10 items-center justify-center rounded-lg text-slate-300 transition-colors hover:bg-surface-dark hover:text-primary">
-                    <span class="material-symbols-outlined">shopping_bag</span>
-                    <span class="absolute right-2 top-2 size-2 rounded-full bg-primary ring-2 ring-background-dark"></span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <main class="flex-1">
-        <div class="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8 py-6">
-            {% block body %}{% endblock %}
-        </div>
-    </main>
-
-    <footer class="mt-12 border-t border-border-dark pt-8 pb-8 text-center text-sm text-slate-500">
-        <div class="flex flex-wrap justify-center gap-6 mb-6">
-            <a class="hover:text-primary" href="#">Envíos y Devoluciones</a>
-            <a class="hover:text-primary" href="#">FAQ</a>
-            <a class="hover:text-primary" href="#">Privacidad</a>
-            <a class="hover:text-primary" href="#">Contacto</a>
-        </div>
-        <p>© 2026 Velvet & Vine. Todos los derechos reservados. +18</p>
-    </footer>
-
+    <div id="react-app">
+        {% block body %}{% endblock %}
+    </div>
 </body>
 </html>
