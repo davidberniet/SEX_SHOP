@@ -1,0 +1,91 @@
+<!-- Nombre -->
+<div>
+    {{ form_label(form.nombre, 'Nombre del Producto *', {'label_attr': {'class': 'block text-sm font-semibold text-slate-300 mb-2'}}) }}
+    {{ form_widget(form.nombre, {'attr': {'class': 'w-full rounded-lg border border-border-dark bg-slate-900/50 px-3 py-2 text-slate-100 placeholder-slate-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors'}}) }}
+    {% if form.nombre.vars.errors %}
+        <div class="mt-1 text-sm text-red-400">{{ form_errors(form.nombre) }}</div>
+    {% endif %}
+</div>
+
+<!-- Descripción -->
+<div>
+    {{ form_label(form.descripcionGeneral, 'Descripción General', {'label_attr': {'class': 'block text-sm font-semibold text-slate-300 mb-2'}}) }}
+    {{ form_widget(form.descripcionGeneral, {'attr': {'class': 'w-full rounded-lg border border-border-dark bg-slate-900/50 px-3 py-2 text-slate-100 placeholder-slate-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors', 'rows': '4'}}) }}
+    {% if form.descripcionGeneral.vars.errors %}
+        <div class="mt-1 text-sm text-red-400">{{ form_errors(form.descripcionGeneral) }}</div>
+    {% endif %}
+</div>
+
+<!-- Precio -->
+<div class="grid grid-cols-2 gap-4">
+    <div>
+        {{ form_label(form.precio, 'Precio Base *', {'label_attr': {'class': 'block text-sm font-semibold text-slate-300 mb-2'}}) }}
+        {{ form_widget(form.precio, {'attr': {'class': 'w-full rounded-lg border border-border-dark bg-slate-900/50 px-3 py-2 text-slate-100 placeholder-slate-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors'}}) }}
+        {% if form.precio.vars.errors %}
+            <div class="mt-1 text-sm text-red-400">{{ form_errors(form.precio) }}</div>
+        {% endif %}
+    </div>
+
+    <!-- URL Imagen -->
+    <div>
+        {{ form_label(form.imagenUrl, 'URL de Imagen', {'label_attr': {'class': 'block text-sm font-semibold text-slate-300 mb-2'}}) }}
+        {{ form_widget(form.imagenUrl, {'attr': {'class': 'w-full rounded-lg border border-border-dark bg-slate-900/50 px-3 py-2 text-slate-100 placeholder-slate-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors', 'placeholder': 'https://ejemplo.com/imagen.jpg'}}) }}
+        {% if form.imagenUrl.vars.errors %}
+            <div class="mt-1 text-sm text-red-400">{{ form_errors(form.imagenUrl) }}</div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Categoría -->
+<div>
+    {{ form_label(form.categoria, 'Categoría *', {'label_attr': {'class': 'block text-sm font-semibold text-slate-300 mb-2'}}) }}
+    {{ form_widget(form.categoria, {'attr': {'class': 'w-full rounded-lg border border-border-dark bg-slate-900/50 px-3 py-2 text-slate-100 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors'}}) }}
+    {% if form.categoria.vars.errors %}
+        <div class="mt-1 text-sm text-red-400">{{ form_errors(form.categoria) }}</div>
+    {% endif %}
+</div>
+
+<!-- Estado -->
+<div class="flex items-center gap-3 rounded-lg border border-border-dark bg-slate-900/30 p-4">
+    <div class="flex items-center">
+        {{ form_widget(form.activo, {'attr': {'class': 'w-4 h-4 rounded cursor-pointer'}}) }}
+    </div>
+    {{ form_label(form.activo, 'Producto Activo', {'label_attr': {'class': 'cursor-pointer text-sm font-semibold text-slate-300'}}) }}
+</div>
+
+<!-- Atributos -->
+<div class="border-t border-border-dark pt-6">
+    <div class="mb-4 flex items-center justify-between">
+        <h3 class="text-lg font-semibold">Atributos</h3>
+        <span class="text-xs text-slate-500">Opcional</span>
+    </div>
+
+    {# El prototipo para nuevos elementos, oculto y sin renderizar #}
+    <div {{ stimulus_target('collection', 'fieldPrototype') }} data-prototype="{{ form_widget(form.atributos.vars.prototype)|e('html_attr') }}" style="display: none;"></div>
+
+    {# El contenedor para los elementos de la colección #}
+    <div {{ stimulus_target('collection', 'collectionContainer') }} class="space-y-3">
+        {% for atributo_form in form.atributos %}
+            <div data-collection-item class="rounded-lg border border-border-dark bg-slate-900/30 p-4">
+                {{ form_widget(atributo_form) }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <button type="button" {{ stimulus_action('collection', 'add') }} class="mt-4 inline-flex items-center gap-2 rounded-lg border border-primary bg-primary/10 px-4 py-2 font-semibold text-primary hover:bg-primary/20 transition-colors">
+        <span class="material-symbols-outlined">add</span>
+        Añadir Atributo
+    </button>
+</div>
+
+<!-- Botones de acción -->
+<div class="flex gap-3 border-t border-border-dark pt-6">
+    <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+        <span class="material-symbols-outlined">save</span>
+        {{ button_label|default('Guardar') }}
+    </button>
+    <a href="{{ path('app_producto_index') }}" class="inline-flex items-center gap-2 rounded-lg border border-border-dark px-6 py-2 font-semibold text-slate-300 hover:bg-slate-900/50 transition-colors">
+        <span class="material-symbols-outlined">close</span>
+        Cancelar
+    </a>
+</div>

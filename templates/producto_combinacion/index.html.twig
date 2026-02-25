@@ -1,0 +1,106 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Combinaciones de {{ producto.nombre }}{% endblock %}
+
+{% block body %}
+    <main class="flex-1 bg-gradient-to-b from-background-dark to-surface-dark">
+        <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+            <div class="mb-8 flex items-start justify-between">
+                <div>
+                    <a href="{{ path('app_producto_show', {'id': producto.id}) }}" class="inline-flex items-center gap-2 text-primary hover:text-pink-400 transition-colors mb-4">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Volver al producto
+                    </a>
+                    <h1 class="text-3xl font-bold tracking-tight">Variaciones de {{ producto.nombre }}</h1>
+                    <p class="mt-2 text-slate-400">Gestiona las combinaciones, SKU, precios e inventario</p>
+                </div>
+                <a href="{{ path('app_producto_combinacion_new', {'id': producto.id}) }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+                    <span class="material-symbols-outlined">add</span>
+                    Nueva Variación
+                </a>
+            </div>
+
+            {% if combinaciones|length > 0 %}
+                <div class="rounded-lg border border-border-dark bg-surface-dark overflow-hidden shadow">
+                    <table class="w-full">
+                        <thead class="bg-slate-900/50 border-b border-border-dark">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-300">Descripción</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-300">SKU</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-300">Precio</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-300">Stock</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-300">Estado</th>
+                                <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-slate-300">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-border-dark">
+                            {% for combinacion in combinaciones %}
+                                <tr class="hover:bg-slate-900/30 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium">{{ combinacion.descripcion }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap font-mono text-sm text-slate-400">{{ combinacion.sku }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">€{{ combinacion.precioEspecifico ?: producto.precio }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-block rounded-full px-3 py-1 text-xs font-semibold
+                                            {% if combinacion.tieneStock() %}
+                                                bg-green-900/30 text-green-400
+                                            {% else %}
+                                                bg-red-900/30 text-red-400
+                                            {% endif %}
+                                        ">
+                                            {{ combinacion.cantidad }} unidades
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-block rounded-full px-3 py-1 text-xs font-semibold
+                                            {% if combinacion.activo %}
+                                                bg-primary/20 text-primary
+                                            {% else %}
+                                                bg-slate-700/30 text-slate-400
+                                            {% endif %}
+                                        ">
+                                            {{ combinacion.activo ? 'Activo' : 'Inactivo' }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        <div class="flex justify-end gap-2">
+                                            <a href="{{ path('app_producto_combinacion_show', {'id': combinacion.id}) }}" class="text-primary hover:text-pink-400 transition-colors" title="Ver detalles">
+                                                <span class="material-symbols-outlined">visibility</span>
+                                            </a>
+                                            <a href="{{ path('app_producto_combinacion_edit', {'id': combinacion.id}) }}" class="text-blue-400 hover:text-blue-300 transition-colors" title="Editar">
+                                                <span class="material-symbols-outlined">edit</span>
+                                            </a>
+                                            <button type="button" class="text-red-400 hover:text-red-300 transition-colors" onclick="confirmDelete('{{ combinacion.id }}')" title="Eliminar">
+                                                <span class="material-symbols-outlined">delete</span>
+                                            </button>
+                                            <form id="delete-form-{{ combinacion.id }}" method="post" action="{{ path('app_producto_combinacion_delete', {'id': combinacion.id}) }}" style="display: none;">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ combinacion.id) }}" />
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="rounded-lg border border-border-dark border-dashed bg-slate-900/30 p-12 text-center">
+                    <span class="material-symbols-outlined text-5xl text-slate-600 mb-4 block">inventory_2</span>
+                    <h3 class="text-lg font-semibold mb-2">Sin variaciones</h3>
+                    <p class="text-slate-400 mb-6">Crea tu primera variación para este producto con diferentes combinaciones de atributos.</p>
+                    <a href="{{ path('app_producto_combinacion_new', {'id': producto.id}) }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+                        <span class="material-symbols-outlined">add</span>
+                        Nueva Variación
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <script>
+        function confirmDelete(id) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta combinación?')) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        }
+    </script>
+{% endblock %}

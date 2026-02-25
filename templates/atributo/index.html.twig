@@ -1,0 +1,89 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Gestión de Atributos{% endblock %}
+
+{% block body %}
+    <main class="flex-1 bg-gradient-to-b from-background-dark to-surface-dark">
+        <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+
+
+            <div class="mb-6">
+                <a href="{{ path('app_admin_dashboard') }}" class="inline-flex items-center gap-2 rounded-lg bg-slate-900/50 px-4 py-2 text-sm font-medium text-slate-300 border border-border-dark hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all shadow-sm">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">grid_view</span>
+                    Volver al Panel de Administración
+                </a>
+            </div>
+            
+            <!-- Encabezado -->
+            <div class="mb-8 flex items-start justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight">Gestión de Atributos</h1>
+                    <p class="mt-2 text-slate-400">Define las características y variaciones de los productos</p>
+                </div>
+                <a href="{{ path('app_atributo_new') }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+                    <span class="material-symbols-outlined">add</span>
+                    Nuevo Atributo
+                </a>
+            </div>
+
+            <!-- Tabla de atributos -->
+            {% if atributos|length > 0 %}
+                <div class="rounded-lg border border-border-dark bg-surface-dark overflow-hidden shadow">
+                    <table class="w-full">
+                        <thead class="bg-slate-900/50 border-b border-border-dark">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-300">Nombre</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-300">Valores</th>
+                                <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-slate-300">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-border-dark">
+                            {% for atributo in atributos %}
+                                <tr class="hover:bg-slate-900/30 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium">{{ atributo.nombre }}</td>
+                                    <td class="px-6 py-4 text-sm text-slate-400">
+                                        {{ atributo.valores|length }} valor(es)
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        <div class="flex justify-end gap-2">
+                                            <a href="{{ path('app_atributo_show', {'id': atributo.id}) }}" class="text-primary hover:text-pink-400 transition-colors" title="Ver detalles">
+                                                <span class="material-symbols-outlined">visibility</span>
+                                            </a>
+                                            <a href="{{ path('app_atributo_edit', {'id': atributo.id}) }}" class="text-blue-400 hover:text-blue-300 transition-colors" title="Editar">
+                                                <span class="material-symbols-outlined">edit</span>
+                                            </a>
+                                            <button type="button" class="text-red-400 hover:text-red-300 transition-colors" onclick="confirmDelete('{{ atributo.id }}', '{{ atributo.nombre }}')" title="Eliminar">
+                                                <span class="material-symbols-outlined">delete</span>
+                                            </button>
+                                            <form id="delete-form-{{ atributo.id }}" method="post" action="{{ path('app_atributo_delete', {'id': atributo.id}) }}" style="display: none;">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ atributo.id) }}" />
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="rounded-lg border border-border-dark border-dashed bg-slate-900/30 p-12 text-center">
+                    <span class="material-symbols-outlined text-5xl text-slate-600 mb-4 block">inventory_2</span>
+                    <h3 class="text-lg font-semibold mb-2">Sin atributos</h3>
+                    <p class="text-slate-400 mb-6">Crea tu primer atributo para empezar a definir variaciones de productos.</p>
+                    <a href="{{ path('app_atributo_new') }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+                        <span class="material-symbols-outlined">add</span>
+                        Crear Primer Atributo
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <script>
+        function confirmDelete(id, nombre) {
+            if (confirm(`¿Estás seguro de que quieres eliminar el atributo "${nombre}"?`)) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        }
+    </script>
+{% endblock %}

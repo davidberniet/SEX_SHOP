@@ -1,0 +1,144 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}{{ combinacion.descripcion }}{% endblock %}
+
+{% block body %}
+    <main class="flex-1 bg-gradient-to-b from-background-dark to-surface-dark">
+        <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+            <!-- Encabezado -->
+            <div class="mb-8 flex items-start justify-between">
+                <div>
+                    <a href="{{ path('app_producto_combinaciones', {'id': combinacion.producto.id}) }}" class="inline-flex items-center gap-2 text-primary hover:text-pink-400 transition-colors mb-4">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Volver a variaciones
+                    </a>
+                    <h1 class="text-3xl font-bold tracking-tight">{{ combinacion.descripcion }}</h1>
+                    <p class="mt-2 text-slate-400">{{ combinacion.producto.nombre }}</p>
+                </div>
+                <a href="{{ path('app_producto_combinacion_edit', {'id': combinacion.id}) }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+                    <span class="material-symbols-outlined">edit</span>
+                    Editar
+                </a>
+            </div>
+
+            <!-- Información general -->
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                        <h2 class="text-lg font-semibold mb-4">Identificación</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">SKU</p>
+                                <p class="mt-1 font-mono text-lg text-primary">{{ combinacion.sku }}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">ID</p>
+                                <p class="mt-1 font-mono text-sm text-slate-400">{{ combinacion.id }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                        <h2 class="text-lg font-semibold mb-4">Precio</h2>
+                        <div class="space-y-4">
+                            {% if combinacion.precioEspecifico %}
+                                <div>
+                                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Precio Especial</p>
+                                    <p class="mt-1 text-2xl font-bold text-primary">€{{ combinacion.precioEspecifico }}</p>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Precio (del producto)</p>
+                                    <p class="mt-1 text-2xl font-bold">€{{ combinacion.producto.precio }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock -->
+                <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                    <h2 class="text-lg font-semibold mb-4">Inventario</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Stock Actual</p>
+                            <p class="mt-2 text-3xl font-bold">{{ combinacion.cantidad }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Estado</p>
+                            <p class="mt-2">
+                                <span class="inline-block rounded-full px-3 py-1 text-sm font-semibold
+                                    {% if combinacion.tieneStock() %}
+                                        bg-green-900/30 text-green-400
+                                    {% else %}
+                                        bg-red-900/30 text-red-400
+                                    {% endif %}
+                                ">
+                                    {% if combinacion.tieneStock() %}
+                                        <span class="material-symbols-outlined inline mr-1">check_circle</span>
+                                        En Stock
+                                    {% else %}
+                                        <span class="material-symbols-outlined inline mr-1">cancel</span>
+                                        Agotado
+                                    {% endif %}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Atributos -->
+                <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                    <h2 class="text-lg font-semibold mb-4">Valores de Atributos</h2>
+                    {% if combinacion.combinacionValores|length > 0 %}
+                        <div class="space-y-2">
+                            {% for valor in combinacion.combinacionValores %}
+                                <div class="rounded bg-slate-900/30 px-4 py-3 flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">{{ valor.atributoValor.atributo.nombre }}</p>
+                                        <p class="mt-1 font-medium">{{ valor.atributoValor.valor }}</p>
+                                    </div>
+                                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-slate-400">Sin valores de atributos especificados</p>
+                    {% endif %}
+                </div>
+
+                <!-- Estado -->
+                <div class="rounded-lg border border-border-dark bg-surface-dark p-6 shadow">
+                    <h2 class="text-lg font-semibold mb-4">Estado</h2>
+                    <p class="mt-2">
+                        <span class="inline-block rounded-full px-3 py-1 text-sm font-semibold
+                            {% if combinacion.activo %}
+                                bg-primary/20 text-primary
+                            {% else %}
+                                bg-slate-700/30 text-slate-400
+                            {% endif %}
+                        ">
+                            {{ combinacion.activo ? 'Activo' : 'Inactivo' }}
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Sección de peligro -->
+            <div class="mt-8 rounded-lg border border-red-900/30 bg-red-900/10 p-6">
+                <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined">warning</span>
+                    Zona de peligro
+                </h3>
+                <p class="text-sm text-slate-400 mb-4">Esta acción no se puede deshacer. Elimina la variación permanentemente.</p>
+                <form method="post" action="{{ path('app_producto_combinacion_delete', {'id': combinacion.id}) }}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta variación?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ combinacion.id) }}" />
+                    <button type="submit" class="inline-flex items-center gap-2 rounded-lg bg-red-600/90 px-4 py-2 font-semibold text-white hover:bg-red-700 transition-colors">
+                        <span class="material-symbols-outlined">delete</span>
+                        Eliminar Variación
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

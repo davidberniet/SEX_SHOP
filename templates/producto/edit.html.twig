@@ -1,0 +1,36 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Editar Producto{% endblock %}
+
+{% block body %}
+    <main class="flex-1 bg-gradient-to-b from-background-dark to-surface-dark">
+        <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+            <!-- Encabezado -->
+            <div class="mb-8">
+                <a href="{{ path('app_producto_index') }}" class="inline-flex items-center gap-2 text-primary hover:text-pink-400 transition-colors mb-4">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    Volver a productos
+                </a>
+                <h1 class="text-3xl font-bold tracking-tight">Editar Producto</h1>
+                <p class="mt-2 text-sm text-slate-400">{{ producto.nombre }}</p>
+            </div>
+
+            <!-- Formulario -->
+            <div class="rounded-lg border border-border-dark bg-surface-dark p-8 shadow mb-8" {{ stimulus_controller('collection') }}>
+                {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+                    {{ include('producto/_form.html.twig', {'button_label': 'Guardar cambios'}) }}
+                {{ form_end(form) }}
+            </div>
+
+            <!-- Sección de peligro -->
+            <div class="rounded-lg border border-red-900/30 bg-red-900/10 p-6">
+                <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined">warning</span>
+                    Zona de peligro
+                </h3>
+                <p class="text-sm text-slate-400 mb-4">Esta acción no se puede deshacer. Elimina el producto permanentemente.</p>
+                {{ include('producto/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </main>
+{% endblock %}
