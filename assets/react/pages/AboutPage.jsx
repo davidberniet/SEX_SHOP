@@ -113,62 +113,43 @@ export function AboutPage() {
 
                 <div className="flex flex-wrap justify-center gap-8 md:gap-14">
                     {/* Person 1 */}
-                    <div className="flex flex-col items-center">
-                        <div className="size-32 md:size-40 rounded-full border-2 border-primary/20 bg-surface-dark p-2 mb-4 overflow-hidden relative shadow-lg shadow-black/50">
-                            <div className="absolute inset-2 rounded-full bg-border-dark flex items-center justify-center">
-                                <span className="material-symbols-outlined text-5xl text-slate-500">face_2</span>
-                            </div>
+                    <div className="flex flex-col items-center max-w-[200px] text-center">
+                        <div className="size-32 md:size-48 rounded-full border-4 border-primary/20 bg-surface-dark mb-4 overflow-hidden relative shadow-lg shadow-black/50 hover:border-primary transition-colors">
+                            <img src="/assets/images/equipo-berlanga.jpg" alt="Berlanga" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
                         </div>
-                        <h4 className="font-bold text-white">Sara Gómez</h4>
-                        <span className="text-xs text-slate-400 uppercase tracking-widest mt-1">Founding Director</span>
+                        <h4 className="font-bold text-white text-lg">Berlanga</h4>
+                        <span className="text-xs text-primary uppercase tracking-widest mt-1 font-bold">CEO</span>
+                        <p className="text-sm text-slate-400 mt-2">Experto en juguetes y CSS</p>
                     </div>
 
                     {/* Person 2 */}
-                    <div className="flex flex-col items-center">
-                        <div className="size-32 md:size-40 rounded-full border-2 border-primary/20 bg-surface-dark p-2 mb-4 overflow-hidden relative shadow-lg shadow-black/50">
-                            <div className="absolute inset-2 rounded-full bg-border-dark flex items-center justify-center">
-                                <span className="material-symbols-outlined text-5xl text-slate-500">face</span>
-                            </div>
+                    <div className="flex flex-col items-center max-w-[200px] text-center">
+                        <div className="size-32 md:size-48 rounded-full border-4 border-primary/20 bg-surface-dark mb-4 overflow-hidden relative shadow-lg shadow-black/50 hover:border-primary transition-colors">
+                            <img src="/assets/images/equipo-juandi.jpg" alt="Juandi" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
                         </div>
-                        <h4 className="font-bold text-white">Miguel Torres</h4>
-                        <span className="text-xs text-slate-400 uppercase tracking-widest mt-1">CEO</span>
-                    </div>
-                </div>
-
-                <div className="mt-10 mb-10 h-px w-24 bg-border-dark mx-auto"></div>
-                <p className="text-xs uppercase tracking-widest text-primary font-bold mb-10">Con el apoyo siempre de un C-Group de primera</p>
-
-                <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-                    <div className="flex flex-col items-center">
-                        <div className="size-24 md:size-28 rounded-full border border-border-dark bg-surface-dark mb-3 flex items-center justify-center overflow-hidden">
-                             <span className="material-symbols-outlined text-4xl text-slate-600">face</span>
-                        </div>
-                        <h4 className="font-bold text-slate-200 text-sm">Raúl Muñoz</h4>
-                        <span className="text-[10px] text-slate-500 uppercase tracking-wide mt-1">CFO / Growth</span>
+                        <h4 className="font-bold text-white text-lg">Juandi</h4>
+                        <span className="text-xs text-primary uppercase tracking-widest mt-1 font-bold">CEO</span>
+                        <p className="text-sm text-slate-400 mt-2">Experto en lencería y PHP</p>
                     </div>
                     
-                    <div className="flex flex-col items-center">
-                        <div className="size-24 md:size-28 rounded-full border border-border-dark bg-surface-dark mb-3 flex items-center justify-center overflow-hidden">
-                             <span className="material-symbols-outlined text-4xl text-slate-600">face_3</span>
+                    {/* Person 3 */}
+                    <div className="flex flex-col items-center max-w-[200px] text-center">
+                        <div className="size-32 md:size-48 rounded-full border-4 border-primary/20 bg-surface-dark mb-4 overflow-hidden relative shadow-lg shadow-black/50 hover:border-primary transition-colors">
+                            <img src="/assets/images/equipo-hugo.jpg" alt="Hugo" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
                         </div>
-                        <h4 className="font-bold text-slate-200 text-sm">Celia Segura</h4>
-                        <span className="text-[10px] text-slate-500 uppercase tracking-wide mt-1">Brand Strategy</span>
+                        <h4 className="font-bold text-white text-lg">Hugo</h4>
+                        <span className="text-xs text-primary uppercase tracking-widest mt-1 font-bold">CEO</span>
+                        <p className="text-sm text-slate-400 mt-2">Experto en chochitos y Nginx</p>
                     </div>
 
-                    <div className="flex flex-col items-center">
-                        <div className="size-24 md:size-28 rounded-full border border-border-dark bg-surface-dark mb-3 flex items-center justify-center overflow-hidden">
-                             <span className="material-symbols-outlined text-4xl text-slate-600">face_4</span>
+                    {/* Person 4 */}
+                    <div className="flex flex-col items-center max-w-[200px] text-center">
+                        <div className="size-32 md:size-48 rounded-full border-4 border-primary/20 bg-surface-dark mb-4 overflow-hidden relative shadow-lg shadow-black/50 hover:border-primary transition-colors">
+                            <img src="/assets/images/equipo-fer.jpg" alt="Fer" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
                         </div>
-                        <h4 className="font-bold text-slate-200 text-sm">Antonia Moreno</h4>
-                        <span className="text-[10px] text-slate-500 uppercase tracking-wide mt-1">Sales Director</span>
-                    </div>
-
-                    <div className="flex flex-col items-center">
-                        <div className="size-24 md:size-28 rounded-full border border-border-dark bg-surface-dark mb-3 flex items-center justify-center overflow-hidden">
-                             <span className="material-symbols-outlined text-4xl text-slate-600">face_5</span>
-                        </div>
-                        <h4 className="font-bold text-slate-200 text-sm">Carlota Ruíz</h4>
-                        <span className="text-[10px] text-slate-500 uppercase tracking-wide mt-1">People / HR</span>
+                        <h4 className="font-bold text-white text-lg">Fer</h4>
+                        <span className="text-xs text-primary uppercase tracking-widest mt-1 font-bold">CEO</span>
+                        <p className="text-sm text-slate-400 mt-2">Experto en muñecas y JavaScript</p>
                     </div>
                 </div>
 
