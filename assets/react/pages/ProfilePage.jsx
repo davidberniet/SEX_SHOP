@@ -68,9 +68,12 @@ export function ProfilePage() {
                                 </div>
                             </div>
 
-                            <div className="pt-4 border-t border-border-dark">
+                            <div className="pt-4 border-t border-border-dark flex gap-4">
                                 <button type="button" className="rounded-lg bg-white px-8 py-3 text-sm font-bold text-background-dark hover:bg-slate-200 transition-colors shadow-lg shadow-white/10">
                                     Guardar Cambios
+                                </button>
+                                <button type="button" onClick={() => window.location.href = '/logout'} className="rounded-lg bg-transparent border border-red-500/50 text-red-500 px-8 py-3 text-sm font-bold hover:bg-red-500/10 transition-colors">
+                                    Cerrar Sesión
                                 </button>
                             </div>
                         </form>
