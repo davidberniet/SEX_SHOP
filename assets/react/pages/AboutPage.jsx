@@ -115,7 +115,7 @@ export function AboutPage() {
                     {/* Person 1 */}
                     <div className="flex flex-col items-center max-w-[200px] text-center">
                         <div className="size-32 md:size-48 rounded-full border-4 border-primary/20 bg-surface-dark mb-4 overflow-hidden relative shadow-lg shadow-black/50 hover:border-primary transition-colors">
-                            <img src="/assets/images/equipo-berlanga.jpg" alt="Berlanga" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
+                            <img src="/berlanga.jpeg" alt="Berlanga" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
                         </div>
                         <h4 className="font-bold text-white text-lg">Berlanga</h4>
                         <span className="text-xs text-primary uppercase tracking-widest mt-1 font-bold">CEO</span>
@@ -125,7 +125,7 @@ export function AboutPage() {
                     {/* Person 2 */}
                     <div className="flex flex-col items-center max-w-[200px] text-center">
                         <div className="size-32 md:size-48 rounded-full border-4 border-primary/20 bg-surface-dark mb-4 overflow-hidden relative shadow-lg shadow-black/50 hover:border-primary transition-colors">
-                            <img src="/assets/images/equipo-juandi.jpg" alt="Juandi" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
+                            <img src="/juandi.jpeg" alt="Juandi" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
                         </div>
                         <h4 className="font-bold text-white text-lg">Juandi</h4>
                         <span className="text-xs text-primary uppercase tracking-widest mt-1 font-bold">CEO</span>
@@ -135,7 +135,7 @@ export function AboutPage() {
                     {/* Person 3 */}
                     <div className="flex flex-col items-center max-w-[200px] text-center">
                         <div className="size-32 md:size-48 rounded-full border-4 border-primary/20 bg-surface-dark mb-4 overflow-hidden relative shadow-lg shadow-black/50 hover:border-primary transition-colors">
-                            <img src="/assets/images/equipo-hugo.jpg" alt="Hugo" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
+                            <img src="/hugo.jpeg" alt="Hugo" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
                         </div>
                         <h4 className="font-bold text-white text-lg">Hugo</h4>
                         <span className="text-xs text-primary uppercase tracking-widest mt-1 font-bold">CEO</span>
@@ -145,7 +145,7 @@ export function AboutPage() {
                     {/* Person 4 */}
                     <div className="flex flex-col items-center max-w-[200px] text-center">
                         <div className="size-32 md:size-48 rounded-full border-4 border-primary/20 bg-surface-dark mb-4 overflow-hidden relative shadow-lg shadow-black/50 hover:border-primary transition-colors">
-                            <img src="/assets/images/equipo-fer.jpg" alt="Fer" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
+                            <img src="/fer.jpeg" alt="Fer" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
                         </div>
                         <h4 className="font-bold text-white text-lg">Fer</h4>
                         <span className="text-xs text-primary uppercase tracking-widest mt-1 font-bold">CEO</span>
