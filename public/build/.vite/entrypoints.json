@@ -3,7 +3,7 @@
   "entryPoints": {
     "app": {
       "js": [
-        "http://127.0.0.1:5173/build/assets/app.jsx"
+        "http://127.0.0.1:5174/build/assets/app.jsx"
       ]
     }
   },
@@ -15,5 +15,5 @@
     2,
     3
   ],
-  "viteServer": "http://127.0.0.1:5173"
+  "viteServer": "http://127.0.0.1:5174"
 }
