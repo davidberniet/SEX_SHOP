@@ -1,27 +1,26 @@
 <html lang="es" class="dark">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    
-    <title>{% block title %}Sexo duro{% endblock %}</title>
-    
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
-    {% block stylesheets %}{% endblock %}
-            {{ vite_entry_link_tags('app') }}
-</head>
+		<title>
+			{% block title %}Sexo duro
+			{% endblock %}
+		</title>
 
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col overflow-x-hidden">
-    <div id="react-app">
-        {% block body %}{% endblock %}
-    </div>
+		<link href="https://fonts.googleapis.com" rel="preconnect"/>
+		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
 
-    {% block javascripts %}{% endblock %}
-    {{ vite_entry_script_tags('app', { dependency: 'react' }) }}
-</body>
-</html>
+		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/> {% block stylesheets %}{% endblock %}
+		{{ vite_entry_link_tags('app') }}
+	</head>
+
+	<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col overflow-x-hidden">
+		<div id="react-app" {% if app.user %} data-user="{{ { id: app.user.id, nombre: app.user.nombre, email: app.user.email, nifCif: app.user.nifCif, fechaNacimiento: app.user.fechaNacimiento ? app.user.fechaNacimiento|date('Y-m-d') : null }|json_encode|e('html_attr') }}" {% endif %}> {% block body %}{% endblock %}
+			</div>
+
+			{% block javascripts %}{% endblock %}
+			{{ vite_entry_script_tags('app', { dependency: 'react' }) }}
+		</body>
+	</html>

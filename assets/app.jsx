@@ -18,7 +18,7 @@ import { CartDrawer } from './react/components/layout/CartDrawer';
 import { AppProvider } from './react/context/AppContext';
 import { useState } from 'react';
 
-function App() {
+function App({ initialUserData }) {
     const [route, setRoute] = useState('home');
     const [routeParams, setRouteParams] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -33,7 +33,7 @@ function App() {
     };
 
     return (
-        <AppProvider>
+        <AppProvider initialUserData={initialUserData}>
             <Header onNavigate={navigate} />
             <main className="flex-1">
                 {route === 'home' && (
@@ -69,8 +69,18 @@ console.log('Script de vite/react cargado, montando aplicación...');
 const rootElement = document.getElementById('react-app');
 
 if (rootElement) {
+    const userDataStr = rootElement.getAttribute('data-user');
+    let userData = null;
+    if (userDataStr) {
+        try {
+            userData = JSON.parse(userDataStr);
+        } catch (e) {
+            console.error('Error parsing user data:', e);
+        }
+    }
+
     const root = createRoot(rootElement);
-    root.render(<App />);
+    root.render(<App initialUserData={userData} />);
     console.log('React montado con éxito en #react-app');
 } else {
     console.error('ERROR CRÍTICO: No se encontró el elemento #react-app en el DOM');
