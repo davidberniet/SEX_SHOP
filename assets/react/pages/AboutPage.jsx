@@ -89,15 +89,18 @@ export function AboutPage() {
                 </button>
             </section>
 
-            {/* Video Placeholder */}
+            {/* Video Section */}
             <section className="container mx-auto px-4 lg:px-8 mb-24 cursor-default text-center">
                 <h2 className="text-3xl font-black text-white mb-10">Ayúdanos a romper tabúes</h2>
                 <div className="max-w-4xl mx-auto bg-surface-dark aspect-video rounded-3xl border border-border-dark shadow-2xl flex items-center justify-center relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-primary/5 transition-colors group-hover:bg-primary/10"></div>
-                    <span className="text-4xl font-black tracking-widest text-[#ec1380] mix-blend-screen opacity-80 z-10 flex items-center gap-4">
-                        <span className="material-symbols-outlined text-5xl">play_circle</span>
-                        VELVET&VINE
-                    </span>
+                    <video 
+                        src="https://www.platanomelon.com/cdn/shop/videos/c/vp/b0db336e7de54a1ea10144e9d9c9089d/b0db336e7de54a1ea10144e9d9c9089d.HD-1080p-7.2Mbps.mp4?v=0" 
+                        className="w-full h-full object-cover"
+                        controls 
+                        autoPlay 
+                        muted 
+                        loop
+                    ></video>
                 </div>
             </section>
 
