@@ -18,7 +18,7 @@ Se proponen 4 áreas de enfoque principales, cada una asignada a un desarrollado
 
 ---
 
-### **Desarrollador 1: Frontend y Experiencia de Usuario (UX)**
+### **Desarrollador Fernando: Frontend y Experiencia de Usuario (UX)**
 
 Responsable de todo lo que el cliente ve y con lo que interactúa. Su objetivo es crear una interfaz atractiva, rápida y fácil de usar.
 
@@ -34,7 +34,7 @@ Responsable de todo lo que el cliente ve y con lo que interactúa. Su objetivo e
 
 ---
 
-### **Desarrollador 2: Catálogo y Gestión de Productos**
+### **Desarrollador Berlanga: Catálogo y Gestión de Productos**
 
 Dueño del corazón del negocio: los productos. Se encarga de la lógica de negocio relacionada con el catálogo, categorías y atributos.
 
@@ -50,7 +50,7 @@ Dueño del corazón del negocio: los productos. Se encarga de la lógica de nego
 
 ---
 
-### **Desarrollador 3: Proceso de Compra y Clientes**
+### **Desarrollador Hugo: Proceso de Compra y Clientes**
 
 Responsable del flujo de compra completo, desde que el usuario añade un producto al carrito hasta que finaliza el pedido.
 
@@ -66,7 +66,7 @@ Responsable del flujo de compra completo, desde que el usuario añade un product
 
 ---
 
-### **Desarrollador 4: Backend Core, Seguridad e Infraestructura**
+### **Desarrollador Juandi: Backend Core, Seguridad e Infraestructura**
 
 El pilar del sistema. Asegura que la aplicación sea segura, robusta y que los cimientos técnicos sean sólidos.
 
