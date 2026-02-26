@@ -14,6 +14,7 @@ import { CatalogPage } from './react/pages/CatalogPage';
 import { ProductPage } from './react/pages/ProductPage';
 import { ProfilePage } from './react/pages/ProfilePage';
 import { ContactPage } from './react/pages/ContactPage';
+import { AboutPage } from './react/pages/AboutPage';
 import { CartDrawer } from './react/components/layout/CartDrawer';
 import { AppProvider } from './react/context/AppContext';
 import { useApp } from './react/context/AppContext';
@@ -69,6 +70,9 @@ function App({ initialUserData }) {
                 )}
                 {route === 'contact' && (
                     <ContactPage />
+                )}
+                {route === 'about' && (
+                    <AboutPage />
                 )}
             </main>
             <Footer />

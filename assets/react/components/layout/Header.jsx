@@ -10,7 +10,7 @@ const Header = ({ onNavigate = () => { } }) => {
                 <nav className="hidden md:flex flex-1 items-center justify-start gap-8">
                     <a onClick={(e) => { e.preventDefault(); onNavigate('catalog'); }} className="text-sm font-medium text-slate-300 transition-colors hover:text-primary cursor-pointer">Shop</a>
                     <a onClick={(e) => { e.preventDefault(); onNavigate('contact'); }} className="text-sm font-medium text-slate-300 transition-colors hover:text-primary cursor-pointer">Contacto</a>
-                    <a onClick={(e) => { e.preventDefault(); onNavigate('education'); }} className="text-sm font-medium text-slate-300 transition-colors hover:text-primary cursor-pointer">Education</a>
+                    <a onClick={(e) => { e.preventDefault(); onNavigate('about'); }} className="text-sm font-medium text-slate-300 transition-colors hover:text-primary cursor-pointer">Nosotros</a>
                 </nav>
 
                 {/* Mobile Menu Button (Left on mobile) */}
