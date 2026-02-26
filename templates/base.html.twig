@@ -14,13 +14,14 @@
 
     {% block stylesheets %}{% endblock %}
             {{ vite_entry_link_tags('app') }}
-    {% block javascripts %}{% endblock %}
-            {{ vite_entry_script_tags('app', { dependency: 'react' }) }}
 </head>
 
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col overflow-x-hidden">
     <div id="react-app">
         {% block body %}{% endblock %}
     </div>
+
+    {% block javascripts %}{% endblock %}
+    {{ vite_entry_script_tags('app', { dependency: 'react' }) }}
 </body>
 </html>
