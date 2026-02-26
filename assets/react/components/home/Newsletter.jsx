@@ -21,17 +21,11 @@ const Newsletter = () => {
                 </span>
                 <h2 className="mb-2 text-xl font-bold text-white">Desbloquea un 10% en tu primer pedido</h2>
                 <p className="mb-6 text-sm text-slate-400">Únete a nuestra comunidad para ofertas exclusivas, novedades y consejos de bienestar.</p>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
-                    <input
-                        className="flex-1 rounded-lg border border-border-dark bg-background-dark px-4 py-2.5 text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary"
-                        placeholder="Tu correo electrónico"
-                        type="email"
-                        required
-                    />
-                    <button className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary/90 transition-colors" type="submit">
-                        Registrarse
+                <div className="flex justify-center mt-6">
+                    <button onClick={handleSubmit} className="rounded-lg bg-primary px-10 py-3 text-base font-bold text-white hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 hover:-translate-y-1 transform">
+                        Crear tu cuenta ahora
                     </button>
-                </form>
+                </div>
             </div>
         </section>
     );
