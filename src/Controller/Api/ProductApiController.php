@@ -25,6 +25,7 @@ class ProductApiController extends AbstractController
                 // 'originalPrice' => null,
                 'category' => $producto->getCategoria() ? $producto->getCategoria()->getNombre() : 'Uncategorized',
                 'image' => $producto->getImagenUrl() ?? 'https://via.placeholder.com/400',
+                'description' => $producto->getDescripcionGeneral(),
                 // 'badge' => null
             ];
         }

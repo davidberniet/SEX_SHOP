@@ -78,9 +78,14 @@ export function ProductPage({ productId, onBack }) {
                         />
                     </div>
                     <div className="grid grid-cols-4 gap-4">
-                        {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className={`aspect-square rounded-xl bg-surface-dark border ${i === 1 ? 'border-primary' : 'border-border-dark opacity-60 hover:opacity-100'} cursor-pointer overflow-hidden transition-all text-center`}>
-                                <img src={product.image} className="w-full h-full object-cover" alt="Thumbnail" />
+                        {[
+                            product.image,
+                            '/uploads/gallery/gallery_pic1.png',
+                            '/uploads/gallery/gallery_pic2.png',
+                            '/uploads/gallery/gallery_pic3.png'
+                        ].map((imgSrc, i) => (
+                            <div key={i} className={`aspect-square rounded-xl bg-surface-dark border ${i === 0 ? 'border-primary' : 'border-border-dark opacity-60 hover:opacity-100'} cursor-pointer overflow-hidden transition-all text-center`}>
+                                <img src={imgSrc} className="w-full h-full object-cover" alt={`Thumbnail ${i + 1}`} />
                             </div>
                         ))}
                     </div>
@@ -97,9 +102,8 @@ export function ProductPage({ productId, onBack }) {
                                 <span className="text-lg font-medium text-slate-500 line-through mb-1">${product.originalPrice.toFixed(2)}</span>
                             )}
                         </div>
-
                         <p className="text-slate-300 text-lg leading-relaxed">
-                            Experimenta el pináculo del placer y la sofisticación. Diseñado con materiales de la más alta calidad para ofrecer sensaciones exquisitas, este producto redefinirá tus momentos de intimidad con un toque de elegancia absoluta.
+                            {product.description || "Experimenta el pináculo del placer y la sofisticación. Diseñado con materiales de la más alta calidad para ofrecer sensaciones exquisitas, este producto redefinirá tus momentos de intimidad con un toque de elegancia absoluta."}
                         </p>
                     </div>
 
