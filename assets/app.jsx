@@ -16,7 +16,20 @@ import { ProfilePage } from './react/pages/ProfilePage';
 import { ContactPage } from './react/pages/ContactPage';
 import { CartDrawer } from './react/components/layout/CartDrawer';
 import { AppProvider } from './react/context/AppContext';
-import { useState } from 'react';
+import { useApp } from './react/context/AppContext';
+import { useState, useEffect } from 'react';
+
+function ProfileRoute() {
+    const { user } = useApp();
+    useEffect(() => {
+        if (!user) {
+            window.location.href = '/login';
+        }
+    }, [user]);
+
+    if (!user) return null;
+    return <ProfilePage />;
+}
 
 function App({ initialUserData }) {
     const [route, setRoute] = useState('home');
@@ -52,7 +65,7 @@ function App({ initialUserData }) {
                     <ProductPage productId={selectedProduct} onBack={() => navigate('catalog')} />
                 )}
                 {route === 'profile' && (
-                    <ProfilePage />
+                    <ProfileRoute />
                 )}
                 {route === 'contact' && (
                     <ContactPage />
