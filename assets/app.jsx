@@ -40,7 +40,7 @@ function App() {
                     <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8 py-6">
                         <Hero />
                         <Categories />
-                        <Bestsellers />
+                        <Bestsellers onNavigate={navigate} />
                         <Education />
                         <Newsletter />
                     </div>

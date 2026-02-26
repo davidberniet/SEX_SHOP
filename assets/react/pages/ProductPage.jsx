@@ -1,14 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
-import { PRODUCTS } from '../data/products';
+import { fetchProduct } from '../data/api';
 
 export function ProductPage({ productId, onBack }) {
     const { addToCart } = useApp();
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState('M');
 
-    // Buscar producto por ID, o usar el primero como fallback para pruebas
-    const product = PRODUCTS.find(p => p.id === productId) || PRODUCTS[0];
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        async function load() {
+            setLoading(true);
+            setError(null);
+            const data = await fetchProduct(productId);
+            if (data && !data.error) {
+                setProduct(data);
+            } else {
+                setError("Producto no encontrado");
+            }
+            setLoading(false);
+        }
+        if (productId) {
+            load();
+        }
+    }, [productId]);
+
+    if (loading) {
+        return (
+            <div className="container mx-auto px-4 py-32 text-center max-w-[1200px]">
+                <span className="material-symbols-outlined animate-spin text-primary block mx-auto mb-4" style={{ fontSize: '48px' }}>sync</span>
+                <p className="text-slate-300">Cargando producto...</p>
+            </div>
+        );
+    }
+
+    if (error || !product) {
+        return (
+            <div className="container mx-auto px-4 py-32 text-center max-w-[1200px]">
+                <span className="material-symbols-outlined text-slate-600 block mx-auto mb-4" style={{ fontSize: '48px' }}>error</span>
+                <p className="text-slate-300 mb-6">{error || "Producto no encontrado"}</p>
+                <button
+                    onClick={onBack}
+                    className="text-primary font-bold hover:underline"
+                >
+                    Volver al catálogo
+                </button>
+            </div>
+        );
+    }
 
     return (
         <div className="container mx-auto px-4 py-8 max-w-[1200px]">
@@ -74,8 +116,8 @@ export function ProductPage({ productId, onBack }) {
                                             key={size}
                                             onClick={() => setSelectedSize(size)}
                                             className={`w-12 h-12 rounded-lg font-bold text-sm flex items-center justify-center transition-all ${selectedSize === size
-                                                    ? 'bg-primary text-white shadow-[0_0_15px_rgba(236,19,128,0.3)]'
-                                                    : 'bg-surface-dark text-slate-300 border border-border-dark hover:border-slate-500 hover:text-white'
+                                                ? 'bg-primary text-white shadow-[0_0_15px_rgba(236,19,128,0.3)]'
+                                                : 'bg-surface-dark text-slate-300 border border-border-dark hover:border-slate-500 hover:text-white'
                                                 }`}
                                         >
                                             {size}
