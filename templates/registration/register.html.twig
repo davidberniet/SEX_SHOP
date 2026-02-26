@@ -1,23 +1,130 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Registro - SEX SHOP{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+<div class="min-h-screen bg-[#181114] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-[url('/assets/images/pattern-dark.png')] bg-repeat">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
+            Crea tu cuenta VIP
+        </h2>
+        <p class="mt-2 text-center text-sm text-gray-400">
+            Únete y descubre nuestras exclusivas colecciones.
+        </p>
+    </div>
 
-    <h1>Register</h1>
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-[#241a1f] py-8 px-4 shadow-2xl sm:rounded-xl sm:px-10 border border-[#ec1380]/20 relative overflow-hidden">
+            <!-- Decorative gradient blur -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-40 h-40 rounded-full bg-[#ec1380] opacity-10 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-40 h-40 rounded-full bg-[#ec1380] opacity-10 blur-3xl"></div>
 
-    {{ form_errors(registrationForm) }}
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="bg-red-500/10 border border-red-500/50 text-red-500 px-4 py-3 rounded-lg relative mb-6 backdrop-blur-sm" role="alert">
+                    <span class="block sm:inline">{{ flash_error }}</span>
+                </div>
+            {% endfor %}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_start(registrationForm, {'attr': {'class': 'space-y-6 relative z-10'}}) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                <!-- Nombre Field -->
+                <div>
+                    {{ form_label(registrationForm.nombre, 'Nombre Completo', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
+                    <div class="mt-1">
+                        {{ form_widget(registrationForm.nombre, {'attr': {
+                            'class': 'appearance-none block w-full px-3 py-3 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 bg-[#181114] text-white focus:outline-none focus:ring-2 focus:ring-[#ec1380] focus:border-transparent transition-all duration-200',
+                            'placeholder': 'Tu nombre'
+                        }}) }}
+                        <div class="text-[#ec1380] text-xs mt-1">
+                            {{ form_errors(registrationForm.nombre) }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div>
+                    {{ form_label(registrationForm.email, 'Correo Electrónico', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
+                    <div class="mt-1">
+                        {{ form_widget(registrationForm.email, {'attr': {
+                            'class': 'appearance-none block w-full px-3 py-3 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 bg-[#181114] text-white focus:outline-none focus:ring-2 focus:ring-[#ec1380] focus:border-transparent transition-all duration-200',
+                            'placeholder': 'tu@email.com'
+                        }}) }}
+                        <div class="text-[#ec1380] text-xs mt-1">
+                            {{ form_errors(registrationForm.email) }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NIF/CIF Field -->
+                <div>
+                    {{ form_label(registrationForm.nifCif, 'DNI / NIE / CIF', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
+                    <div class="mt-1">
+                        {{ form_widget(registrationForm.nifCif, {'attr': {
+                            'class': 'appearance-none block w-full px-3 py-3 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 bg-[#181114] text-white focus:outline-none focus:ring-2 focus:ring-[#ec1380] focus:border-transparent transition-all duration-200',
+                            'placeholder': '12345678A'
+                        }}) }}
+                        <div class="text-[#ec1380] text-xs mt-1">
+                            {{ form_errors(registrationForm.nifCif) }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fecha Nacimiento Field -->
+                <div>
+                    {{ form_label(registrationForm.fechaNacimiento, 'Fecha de Nacimiento', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
+                    <div class="mt-1">
+                        {{ form_widget(registrationForm.fechaNacimiento, {'attr': {
+                            'class': 'appearance-none block w-full px-3 py-3 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 bg-[#181114] text-white focus:outline-none focus:ring-2 focus:ring-[#ec1380] focus:border-transparent transition-all duration-200 [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert'
+                        }}) }}
+                        <div class="text-[#ec1380] text-xs mt-1">
+                            {{ form_errors(registrationForm.fechaNacimiento) }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div>
+                    {{ form_label(registrationForm.plainPassword, 'Contraseña', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
+                    <div class="mt-1">
+                        {{ form_widget(registrationForm.plainPassword, {'attr': {
+                            'class': 'appearance-none block w-full px-3 py-3 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 bg-[#181114] text-white focus:outline-none focus:ring-2 focus:ring-[#ec1380] focus:border-transparent transition-all duration-200',
+                            'placeholder': '••••••••'
+                        }}) }}
+                        <div class="text-[#ec1380] text-xs mt-1">
+                            {{ form_errors(registrationForm.plainPassword) }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms Checkbox -->
+                <div class="flex items-center">
+                    {{ form_widget(registrationForm.agreeTerms, {'attr': {
+                        'class': 'h-4 w-4 text-[#ec1380] focus:ring-[#ec1380] border-gray-700 rounded bg-[#181114]'
+                    }}) }}
+                    {{ form_label(registrationForm.agreeTerms, 'Acepto los términos y condiciones', {'label_attr': {'class': 'ml-2 block text-sm text-gray-400'}}) }}
+                </div>
+                <div class="text-[#ec1380] text-xs">
+                    {{ form_errors(registrationForm.agreeTerms) }}
+                </div>
+
+                <!-- Button -->
+                <div>
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-sm font-bold text-white bg-[#ec1380] hover:bg-[#d01070] hover:scale-[1.02] transform focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ec1380] focus:ring-offset-[#241a1f] transition-all duration-300">
+                        Registrarse
+                    </button>
+                </div>
+
+            {{ form_end(registrationForm) }}
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-400">
+                    ¿Ya tienes una cuenta? 
+                    <a href="/login" class="font-medium text-[#ec1380] hover:text-[#ff1a90] transition-colors">
+                        Inicia sesión aquí
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

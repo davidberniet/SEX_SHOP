@@ -17,6 +17,16 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('nombre', \Symfony\Component\Form\Extension\Core\Type\TextType::class, [
+                'constraints' => [new NotBlank(message: 'Por favor, introduce tu nombre')],
+            ])
+            ->add('fechaNacimiento', \Symfony\Component\Form\Extension\Core\Type\DateType::class, [
+                'widget' => 'single_text',
+                'constraints' => [new NotBlank(message: 'Por favor, introduce tu fecha de nacimiento')],
+            ])
+            ->add('nifCif', \Symfony\Component\Form\Extension\Core\Type\TextType::class, [
+                'constraints' => [new NotBlank(message: 'Por favor, introduce tu DNI, NIE o CIF')],
+            ])
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

@@ -28,6 +28,11 @@ class RegistrationController extends AbstractController
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
+            // Set default value only for verificadoEdad (assumed true if registration successful)
+            if ($user->isVerificadoEdad() === null) {
+                $user->setVerificadoEdad(true);
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 

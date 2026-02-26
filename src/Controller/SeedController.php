@@ -6,6 +6,8 @@ use App\Entity\Categoria;
 use App\Entity\Producto;
 use App\Entity\Atributo;
 use App\Entity\AtributoValor;
+use App\Entity\Administrador;
+use \Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,8 +16,16 @@ use Symfony\Component\Routing\Attribute\Route;
 class SeedController extends AbstractController
 {
     #[Route('/seed-data', name: 'seed_data')]
-    public function seedData(EntityManagerInterface $em): Response
+    public function seedData(EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {
+        // Crear Administrador
+        $admin = new Administrador();
+        $admin->setEmail('admin@admin.com');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setNombre('Administrador Principal');
+        $admin->setPassword($userPasswordHasher->hashPassword($admin, 'admin123'));
+        $em->persist($admin);
+
         // Crear categoría
         $categoria = new Categoria();
         $categoria->setNombre('Vibradores');
