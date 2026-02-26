@@ -5,16 +5,13 @@ export function AboutPage() {
         <div className="min-h-screen bg-background-dark py-12">
             {/* Hero Section */}
             <section className="container mx-auto px-4 lg:px-8 mb-24 cursor-default">
-                <div className="relative rounded-3xl overflow-hidden bg-surface-dark border border-border-dark flex flex-col md:flex-row shadow-2xl">
-                    <div className="md:w-3/5 h-[400px] md:h-[500px] bg-[url('/assets/images/pattern-dark.png')] bg-cover relative">
-                        {/* Placeholder image representation for the group photo */}
-                        <div className="absolute inset-0 bg-primary/20 backdrop-blur-[2px] flex items-center justify-center">
-                            <span className="material-symbols-outlined text-white/50 text-8xl">groups</span>
-                        </div>
+                <div className="relative rounded-3xl overflow-hidden bg-surface-dark border border-border-dark grid grid-cols-1 md:grid-cols-2 shadow-2xl">
+                    <div className="relative">
+                        <img src="/fotoequipo.jpeg" alt="Equipo Velvet & Vine" className="w-auto h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" }} />
                     </div>
-                    <div className="md:w-2/5 p-10 md:p-16 flex flex-col justify-center bg-gradient-to-br from-[#241a1f] to-background-dark relative">
+                    <div className="p-10 md:p-16 flex flex-col justify-center bg-gradient-to-br from-[#241a1f] to-background-dark relative">
                         {/* Decorative glow */}
-                        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-primary opacity-10 blur-3xl"></div>
+                    
                         
                         <h1 className="text-4xl lg:text-5xl font-black text-white mb-6 tracking-tight relative z-10">
                             Únete<br /><span className="text-primary text-3xl lg:text-4xl mt-2 block">al equipo</span>
