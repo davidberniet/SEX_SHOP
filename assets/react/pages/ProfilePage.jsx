@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useApp } from '../context/AppContext';
 
 export function ProfilePage() {
     const [activeTab, setActiveTab] = useState('profile');
+    const { user } = useApp();
 
     return (
         <div className="container mx-auto px-4 py-8 lg:py-12 max-w-[1000px] flex flex-col md:flex-row gap-8">
@@ -46,28 +48,32 @@ export function ProfilePage() {
                         <form className="space-y-6">
                             <div className="grid md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wide">Nombre</label>
-                                    <input type="text" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" defaultValue="Alex" />
+                                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wide">Nombre o Razón Social</label>
+                                    <input type="text" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" defaultValue={user?.nombre || ''} />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wide">Apellidos</label>
-                                    <input type="text" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" defaultValue="Doe" />
+                                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wide">DNI / NIE / CIF</label>
+                                    <input type="text" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" defaultValue={user?.nifCif || ''} />
                                 </div>
                             </div>
 
-                            <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-300 uppercase tracking-wide">Correo Electrónico</label>
-                                <input type="email" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" defaultValue="alex.doe@example.com" />
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wide">Correo Electrónico</label>
+                                    <input type="email" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" defaultValue={user?.email || ''} readOnly />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wide">Fecha de Nacimiento</label>
+                                    <input type="date" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" defaultValue={user?.fechaNacimiento || ''} />
+                                </div>
                             </div>
 
-                            <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-300 uppercase tracking-wide">Teléfono (Opcional)</label>
-                                <input type="tel" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="+34 600 000 000" />
-                            </div>
-
-                            <div className="pt-4 border-t border-border-dark">
+                            <div className="pt-4 border-t border-border-dark flex gap-4">
                                 <button type="button" className="rounded-lg bg-white px-8 py-3 text-sm font-bold text-background-dark hover:bg-slate-200 transition-colors shadow-lg shadow-white/10">
                                     Guardar Cambios
+                                </button>
+                                <button type="button" onClick={() => window.location.href = '/logout'} className="rounded-lg bg-transparent border border-red-500/50 text-red-500 px-8 py-3 text-sm font-bold hover:bg-red-500/10 transition-colors">
+                                    Cerrar Sesión
                                 </button>
                             </div>
                         </form>

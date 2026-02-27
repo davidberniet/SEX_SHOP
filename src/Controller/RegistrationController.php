@@ -28,12 +28,22 @@ class RegistrationController extends AbstractController
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
+            // Set default value only for verificadoEdad (assumed true if registration successful)
+            if ($user->isVerificadoEdad() === null) {
+                $user->setVerificadoEdad(true);
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 
             // do anything else you need here, like send an email
 
-            return $security->login($user, 'form_login', 'main');
+            $response = $security->login($user, 'form_login', 'main');
+            if (null !== $response) {
+                return $response;
+            }
+
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('registration/register.html.twig', [
