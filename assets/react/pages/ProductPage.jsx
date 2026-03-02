@@ -98,8 +98,8 @@ export function ProductPage({ productId, onBack }) {
                             )}
                         </div>
 
-                        <p className="text-slate-300 text-lg leading-relaxed">
-                            Experimenta el pináculo del placer y la sofisticación. Diseñado con materiales de la más alta calidad para ofrecer sensaciones exquisitas, este producto redefinirá tus momentos de intimidad con un toque de elegancia absoluta.
+                        <p className="text-slate-300 text-lg leading-relaxed whitespace-pre-wrap">
+                            {product.description || "Este producto no tiene una descripción adicional."}
                         </p>
                     </div>
 

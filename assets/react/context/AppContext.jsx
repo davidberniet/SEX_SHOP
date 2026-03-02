@@ -34,11 +34,13 @@ export function AppProvider({ children, initialUserData = null }) {
         ));
     };
 
+    const clearCart = () => setCartItems([]);
+
     return (
         <AppContext.Provider value={{
             user, setUser,
             cartItems, cartCount, cartTotal,
-            addToCart, removeFromCart, updateQuantity,
+            addToCart, removeFromCart, updateQuantity, clearCart,
             isCartOpen, setIsCartOpen
         }}>
             {children}

@@ -19,7 +19,7 @@ export function ContactPage() {
                         <span className="material-symbols-outlined">mail</span>
                     </div>
                     <h3 className="font-bold text-white mb-1">Email</h3>
-                    <p className="text-sm text-slate-400">hello@velvetvine.com</p>
+                    <p className="text-sm text-slate-400">hello@lujusex.com</p>
                 </div>
                 <div className="bg-surface-dark border border-border-dark rounded-2xl p-6 text-center hover:border-primary/50 transition-colors">
                     <div className="size-12 rounded-full bg-primary/20 text-primary mx-auto flex items-center justify-center mb-4">

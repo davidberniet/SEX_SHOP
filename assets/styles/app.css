@@ -15,8 +15,27 @@
 
 body {
     @apply bg-background-light text-slate-900 antialiased min-h-screen flex flex-col overflow-x-hidden;
+    cursor: url('/cursor-down.png') 16 16, auto;
 }
 
 .dark body {
     @apply bg-background-dark text-slate-100;
+}
+
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+    cursor: url('/cursor-up.png') 16 16, pointer;
+}
+
+a:active,
+button:active,
+[role="button"]:active,
+input[type="submit"]:active,
+input[type="button"]:active,
+input[type="reset"]:active {
+    cursor: url('/cursor-ending.png') 16 16, pointer;
 }

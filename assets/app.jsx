@@ -20,7 +20,7 @@ import { AppProvider } from './react/context/AppContext';
 import { useApp } from './react/context/AppContext';
 import { useState, useEffect } from 'react';
 
-function ProfileRoute() {
+function ProfileRoute({ routeParams }) {
     const { user } = useApp();
     useEffect(() => {
         if (!user) {
@@ -29,15 +29,27 @@ function ProfileRoute() {
     }, [user]);
 
     if (!user) return null;
-    return <ProfilePage />;
+    return <ProfilePage initialTab={routeParams?.tab || 'profile'} />;
 }
 
 function App({ initialUserData }) {
-    const [route, setRoute] = useState('home');
-    const [routeParams, setRouteParams] = useState(null);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [route, setRoute] = useState(() => sessionStorage.getItem('currentRoute') || 'home');
+    const [routeParams, setRouteParams] = useState(() => {
+        const stored = sessionStorage.getItem('currentRouteParams');
+        return stored ? JSON.parse(stored) : null;
+    });
+    const [selectedProduct, setSelectedProduct] = useState(() => {
+        const stored = sessionStorage.getItem('currentSelectedProduct');
+        return stored ? JSON.parse(stored) : null;
+    });
 
     const navigate = (newRoute, params = null) => {
+        sessionStorage.setItem('currentRoute', newRoute);
+        sessionStorage.setItem('currentRouteParams', JSON.stringify(params));
+        if (newRoute === 'product' && params) {
+            sessionStorage.setItem('currentSelectedProduct', JSON.stringify(params));
+        }
+
         setRoute(newRoute);
         setRouteParams(params);
         if (newRoute === 'product' && params) {
@@ -66,7 +78,7 @@ function App({ initialUserData }) {
                     <ProductPage productId={selectedProduct} onBack={() => navigate('catalog')} />
                 )}
                 {route === 'profile' && (
-                    <ProfileRoute />
+                    <ProfileRoute routeParams={routeParams} />
                 )}
                 {route === 'contact' && (
                     <ContactPage />
@@ -76,7 +88,7 @@ function App({ initialUserData }) {
                 )}
             </main>
             <Footer />
-            <CartDrawer />
+            <CartDrawer onNavigate={navigate} />
         </AppProvider>
     );
 }
