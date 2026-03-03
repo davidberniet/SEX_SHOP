@@ -11,13 +11,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/api/orders')]
 class OrderApiController extends AbstractController
 {
     #[Route('', name: 'api_orders_create', methods: ['POST'])]
-    #[IsGranted('ROLE_USER')]
     public function createOrder(
         Request $request,
         ProductoRepository $productoRepository,
@@ -36,7 +34,12 @@ class OrderApiController extends AbstractController
         }
 
         $pedido = new Pedido();
-        $pedido->setCliente($user);
+        
+        // Only set client if user is a Cliente
+        if ($user instanceof \App\Entity\Cliente) {
+            $pedido->setCliente($user);
+        }
+        
         $pedido->setFfechaPedido(new \DateTime());
         $pedido->setEmpaquetadoDiscreto(true); // Default
         
@@ -94,10 +97,12 @@ class OrderApiController extends AbstractController
     }
 
     #[Route('/me', name: 'api_orders_me', methods: ['GET'])]
-    #[IsGranted('ROLE_USER')]
     public function getMyOrders(PedidoRepository $pedidoRepository): JsonResponse
     {
         $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['error' => 'User not logged in'], 401);
+        }
         if (!$user) {
             return $this->json(['error' => 'User not logged in'], 401);
         }

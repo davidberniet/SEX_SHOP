@@ -7,7 +7,7 @@ const IMAGES = [
     "https://lh3.googleusercontent.com/aida-public/AB6AXuC2yawi7DTIb1HbI7Vdrai3QanlGt4tYfEI8O3KUaCY4w8TLkREktY4GxubfqA9gIrwLgnqGzYa3YedmyfRFXCERCLGr_jz-D9nm-ng1clwHuJ4gGgYaOJS9Y_0RcIVJ4j00SdFpDPqBR0yclGitOev8pbAEheodASIGMmYmmy4SDQuUKgf5uikpoC6FcCJO-Xbzoqiyj8dJ1z8LV7PE2_3WhJpdMwRUo7eJvNfDMa7Yeed5xiFJ2XUHEKrEVZfkzGvathpfFFCQXU"
 ];
 
-const Hero = () => {
+const Hero = ({ onNavigate }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
@@ -46,10 +46,14 @@ const Hero = () => {
                         Productos de placer selectos para el estilo de vida moderno. Elegantes, seguros para el cuerpo y siempre con envío discreto.
                     </p>
                     <div className="flex flex-col gap-4 sm:flex-row">
-                        <button className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-sm font-bold text-white transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(236,19,128,0.4)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background-dark">
+                        <button 
+                            onClick={() => onNavigate && onNavigate('catalog')}
+                            className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-sm font-bold text-white transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(236,19,128,0.4)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background-dark cursor-pointer">
                             Explorar la Colección
                         </button>
-                        <button className="inline-flex h-12 items-center justify-center rounded-lg border border-slate-600 bg-transparent px-8 text-sm font-bold text-white transition-colors hover:bg-white/10 focus:outline-none">
+                        <button 
+                            onClick={() => onNavigate && onNavigate('about')}
+                            className="inline-flex h-12 items-center justify-center rounded-lg border border-slate-600 bg-transparent px-8 text-sm font-bold text-white transition-colors hover:bg-white/10 focus:outline-none cursor-pointer">
                             Ver Lookbook
                         </button>
                     </div>

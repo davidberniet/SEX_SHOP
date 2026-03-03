@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Education = () => {
+const Education = ({ onNavigate }) => {
     return (
         <section className="mt-16 rounded-xl bg-surface-dark px-6 py-12 md:px-12">
             <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -29,7 +29,7 @@ const Education = () => {
                             <span className="text-sm text-slate-300"><strong>Guías de Expertos:</strong> Recursos educativos para ayudarte a explorar con seguridad.</span>
                         </li>
                     </ul>
-                    <a className="inline-flex items-center gap-2 font-bold text-primary hover:underline cursor-pointer" onClick={(e) => e.preventDefault()}>
+                    <a className="inline-flex items-center gap-2 font-bold text-primary hover:underline cursor-pointer" onClick={() => onNavigate && onNavigate('about')}>
                         Lee nuestra Guía de Bienestar
                         <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
                     </a>

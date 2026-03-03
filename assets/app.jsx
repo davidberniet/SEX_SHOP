@@ -64,10 +64,10 @@ function App({ initialUserData }) {
             <main className="flex-1">
                 {route === 'home' && (
                     <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8 py-6">
-                        <Hero />
-                        <Categories />
+                        <Hero onNavigate={navigate} />
+                        <Categories onNavigate={navigate} />
                         <Bestsellers onNavigate={navigate} />
-                        <Education />
+                        <Education onNavigate={navigate} />
                         <Newsletter />
                     </div>
                 )}

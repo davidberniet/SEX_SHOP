@@ -34,6 +34,12 @@ class Administrador implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $nombre = null;
 
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $nifCif = null;
+
+    #[ORM\Column(type: 'date', nullable: true)]
+    private ?\DateTimeInterface $fechaNacimiento = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -117,6 +123,30 @@ class Administrador implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNombre(string $nombre): static
     {
         $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    public function getNifCif(): ?string
+    {
+        return $this->nifCif;
+    }
+
+    public function setNifCif(?string $nifCif): static
+    {
+        $this->nifCif = $nifCif;
+
+        return $this;
+    }
+
+    public function getFechaNacimiento(): ?\DateTimeInterface
+    {
+        return $this->fechaNacimiento;
+    }
+
+    public function setFechaNacimiento(?\DateTimeInterface $fechaNacimiento): static
+    {
+        $this->fechaNacimiento = $fechaNacimiento;
 
         return $this;
     }

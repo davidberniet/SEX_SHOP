@@ -35,11 +35,13 @@
 					<div class="mt-1">
 						{{ form_widget(registrationForm.nombre, {'attr': {
                             'class': 'appearance-none block w-full px-3 py-3 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 bg-[#181114] text-white focus:outline-none focus:ring-2 focus:ring-[#ec1380] focus:border-transparent transition-all duration-200',
-                            'placeholder': 'Tu nombre'
+                            'placeholder': 'Tu nombre',
+                            'minlength': '3'
                         }}) }}
 						<div class="text-[#ec1380] text-xs mt-1">
 							{{ form_errors(registrationForm.nombre) }}
 						</div>
+						<p class="text-gray-500 text-xs mt-1">Mínimo 3 caracteres</p>
 					</div>
 				</div>
 
@@ -49,7 +51,8 @@
 					<div class="mt-1">
 						{{ form_widget(registrationForm.email, {'attr': {
                             'class': 'appearance-none block w-full px-3 py-3 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 bg-[#181114] text-white focus:outline-none focus:ring-2 focus:ring-[#ec1380] focus:border-transparent transition-all duration-200',
-                            'placeholder': 'tu@email.com'
+                            'placeholder': 'tu@email.com',
+                            'type': 'email'
                         }}) }}
 						<div class="text-[#ec1380] text-xs mt-1">
 							{{ form_errors(registrationForm.email) }}
@@ -90,20 +93,29 @@
 					<div class="mt-1">
 						{{ form_widget(registrationForm.plainPassword, {'attr': {
                             'class': 'appearance-none block w-full px-3 py-3 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 bg-[#181114] text-white focus:outline-none focus:ring-2 focus:ring-[#ec1380] focus:border-transparent transition-all duration-200',
-                            'placeholder': '••••••••'
+                            'placeholder': '••••••••',
+                            'minlength': '8'
                         }}) }}
 						<div class="text-[#ec1380] text-xs mt-1">
 							{{ form_errors(registrationForm.plainPassword) }}
+						</div>
+						<div class="text-gray-500 text-xs mt-2 space-y-1">
+							<p>✓ Mínimo 8 caracteres</p>
+							<p>✓ Debe incluir mayúsculas (A-Z)</p>
+							<p>✓ Debe incluir minúsculas (a-z)</p>
+							<p>✓ Debe incluir números (0-9)</p>
 						</div>
 					</div>
 				</div>
 
 				<!-- Terms Checkbox -->
-				<div class="flex items-center">
+				<div class="flex items-start">
 					{{ form_widget(registrationForm.agreeTerms, {'attr': {
-                        'class': 'h-4 w-4 text-[#ec1380] focus:ring-[#ec1380] border-gray-700 rounded bg-[#181114]'
+                        'class': 'h-4 w-4 text-[#ec1380] focus:ring-[#ec1380] border-gray-700 rounded bg-[#181114] mt-1'
                     }}) }}
-					{{ form_label(registrationForm.agreeTerms, 'Acepto los términos y condiciones', {'label_attr': {'class': 'ml-2 block text-sm text-gray-400'}}) }}
+					<label for="{{ registrationForm.agreeTerms.vars.id }}" class="ml-2 block text-sm text-gray-400">
+						Acepto los <a href="#" class="text-[#ec1380] hover:underline">términos y condiciones</a> y la <a href="#" class="text-[#ec1380] hover:underline">política de privacidad</a>
+					</label>
 				</div>
 				<div class="text-[#ec1380] text-xs">
 					{{ form_errors(registrationForm.agreeTerms) }}
