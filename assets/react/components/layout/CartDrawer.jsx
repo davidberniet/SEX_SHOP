@@ -99,7 +99,7 @@ export function CartDrawer({ onNavigate }) {
                                                 <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>add</span>
                                             </button>
                                         </div>
-                                        <span className="font-bold text-primary">${(item.price * item.quantity).toFixed(2)}</span>
+                                        <span className="font-bold text-primary">{(item.price * item.quantity).toFixed(2)}€</span>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@ export function CartDrawer({ onNavigate }) {
                     <div className="border-t border-border-dark p-6 bg-surface-dark space-y-4">
                         <div className="flex justify-between items-center text-lg">
                             <span className="font-medium text-slate-300">Total</span>
-                            <span className="font-bold text-white text-2xl">${cartTotal.toFixed(2)}</span>
+                            <span className="font-bold text-white text-2xl">{cartTotal.toFixed(2)}€</span>
                         </div>
                         <button
                             onClick={handleCheckout}

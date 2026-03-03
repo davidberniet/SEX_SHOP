@@ -97,9 +97,9 @@ export function ProductPage({ productId, onBack }) {
                         <p className="text-sm font-bold uppercase tracking-widest text-primary mb-2">{product.category}</p>
                         <h1 className="text-4xl font-black text-white mb-4 tracking-tight">{product.name}</h1>
                         <div className="flex items-end gap-3 mb-6">
-                            <span className="text-3xl font-bold text-white">${product.price.toFixed(2)}</span>
+                            <span className="text-3xl font-bold text-white">{product.price.toFixed(2)}€</span>
                             {product.originalPrice && (
-                                <span className="text-lg font-medium text-slate-500 line-through mb-1">${product.originalPrice.toFixed(2)}</span>
+                                <span className="text-lg font-medium text-slate-500 line-through mb-1">{product.originalPrice.toFixed(2)}€</span>
                             )}
                         </div>
 

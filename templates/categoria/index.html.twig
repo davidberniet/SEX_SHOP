@@ -4,22 +4,23 @@
 
 {% block body %}
     <main class="flex-1 bg-gradient-to-b from-background-dark to-surface-dark">
-        <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-6xl px-3 py-8 sm:px-4 sm:py-12 lg:px-8">
 
             <div class="mb-6">
-                <a href="{{ path('app_admin_dashboard') }}" class="inline-flex items-center gap-2 rounded-lg bg-slate-900/50 px-4 py-2 text-sm font-medium text-slate-300 border border-border-dark hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all shadow-sm">
-                    <span class="material-symbols-outlined" style="font-size: 18px;">grid_view</span>
-                    Volver al Panel de Administración
+                <a href="{{ path('app_admin_dashboard') }}" class="inline-flex items-center gap-2 rounded-lg bg-slate-900/50 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-slate-300 border border-border-dark hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all shadow-sm">
+                    <span class="material-symbols-outlined" style="font-size: 16px; min-width: 24px;">grid_view</span>
+                    <span class="hidden sm:inline">Volver al Panel de Administración</span>
+                    <span class="sm:hidden">Volver</span>
                 </a>
             </div>
             
             <!-- Encabezado -->
-            <div class="mb-8 flex items-center justify-between">
+            <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h1 class="text-3xl font-bold tracking-tight">Gestión de Categorías</h1>
-                    <p class="mt-2 text-sm text-slate-400">{{ categorias|length }} categoría(s) disponible(s)</p>
+                    <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight">Gestión de Categorías</h1>
+                    <p class="mt-2 text-xs sm:text-sm text-slate-400">{{ categorias|length }} categoría(s) disponible(s)</p>
                 </div>
-                <a href="{{ path('app_categoria_new') }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+                <a href="{{ path('app_categoria_new') }}" class="inline-flex items-center justify-center sm:justify-start gap-2 rounded-lg bg-primary px-3 sm:px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors text-sm">
                     <span class="material-symbols-outlined">add</span>
                     Nueva Categoría
                 </a>
@@ -27,30 +28,32 @@
 
             <!-- Tabla de Categorías -->
             {% if categorias|length > 0 %}
-                <div class="overflow-hidden rounded-lg border border-border-dark bg-surface-dark shadow">
-                    <table class="w-full divide-y divide-border-dark">
-                        <thead class="bg-slate-900/50">
+                <div class="overflow-x-auto rounded-lg border border-border-dark bg-surface-dark shadow">
+                    <table class="w-full divide-y divide-border-dark text-sm">
+                        <thead class="bg-slate-900/50 text-xs">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-300">Nombre</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-300">Descripción</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-300">Productos</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-300">Acciones</th>
+                                <th class="px-3 sm:px-4 py-3 text-left font-medium uppercase tracking-wider text-slate-300">Nombre</th>
+                                <th class="px-3 sm:px-4 py-3 text-left font-medium uppercase tracking-wider text-slate-300 hidden sm:table-cell">Descripción</th>
+                                <th class="px-3 sm:px-4 py-3 text-left font-medium uppercase tracking-wider text-slate-300">Productos</th>
+                                <th class="px-3 sm:px-4 py-3 text-center font-medium uppercase tracking-wider text-slate-300">Acciones</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-border-dark">
                             {% for categoria in categorias %}
                                 <tr class="hover:bg-slate-900/30 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ categoria.nombre }}</td>
-                                    <td class="px-6 py-4 text-sm text-slate-400 max-w-xs truncate">
-                                        {{ categoria.descripcion ?: 'Sin descripción' }}
+                                    <td class="px-3 sm:px-4 py-3 whitespace-nowrap text-xs sm:text-sm font-medium">
+                                        <div class="max-w-xs truncate">{{ categoria.nombre }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                        <span class="inline-flex items-center gap-1 rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary">
+                                    <td class="px-3 sm:px-4 py-3 text-xs sm:text-sm text-slate-400 max-w-xs truncate hidden sm:table-cell">
+                                        <div class="max-w-xs truncate">{{ categoria.descripcion ?: 'Sin descripción' }}</div>
+                                    </td>
+                                    <td class="px-3 sm:px-4 py-3 whitespace-nowrap text-xs sm:text-sm">
+                                        <span class="inline-flex items-center gap-1 rounded-full bg-primary/20 px-2 sm:px-3 py-1 text-xs font-medium text-primary">
                                             {{ categoria.productos|length }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                        <div class="flex items-center gap-3">
+                                    <td class="px-3 sm:px-4 py-3 whitespace-nowrap text-sm">
+                                        <div class="flex items-center justify-center gap-2">
                                             <a href="{{ path('app_categoria_show', {'id': categoria.id}) }}" class="text-slate-400 hover:text-primary transition-colors" title="Ver">
                                                 <span class="material-symbols-outlined">visibility</span>
                                             </a>
@@ -71,12 +74,12 @@
                     </table>
                 </div>
             {% else %}
-                <div class="rounded-lg border border-border-dark bg-surface-dark p-12 text-center">
-                    <span class="material-symbols-outlined mx-auto block mb-4 text-4xl text-slate-600">folder</span>
-                    <p class="text-slate-400 mb-4">No hay categorías disponibles</p>
-                    <a href="{{ path('app_categoria_new') }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
+                <div class="rounded-lg border border-border-dark bg-surface-dark p-8 sm:p-12 text-center">
+                    <span class="material-symbols-outlined mx-auto block mb-4 text-3xl sm:text-4xl text-slate-600">folder</span>
+                    <p class="text-slate-400 mb-4 text-sm sm:text-base">No hay categorías disponibles</p>
+                    <a href="{{ path('app_categoria_new') }}" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors text-sm">
                         <span class="material-symbols-outlined">add</span>
-                        Crear primera categoría
+                        <span>Crear primera categoría</span>
                     </a>
                 </div>
             {% endif %}

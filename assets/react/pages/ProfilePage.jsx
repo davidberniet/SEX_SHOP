@@ -122,7 +122,7 @@ export function ProfilePage({ initialTab = 'profile' }) {
                                                 <p className="text-xs text-slate-500">{order.fecha}</p>
                                             </div>
                                             <span className="text-lg font-black text-primary border border-primary/20 bg-primary/10 px-3 py-1 rounded-lg">
-                                                ${order.total.toFixed(2)}
+                                                {order.total.toFixed(2)}€
                                             </span>
                                         </div>
                                         <div className="space-y-3">
@@ -132,7 +132,7 @@ export function ProfilePage({ initialTab = 'profile' }) {
                                                         <span className="font-bold text-slate-400 w-6">{detalle.cantidad}x</span>
                                                         <span className="text-white">{detalle.nombreProducto}</span>
                                                     </div>
-                                                    <span className="text-slate-300">${detalle.precioUnitario.toFixed(2)}</span>
+                                                    <span className="text-slate-300">{detalle.precioUnitario.toFixed(2)}€</span>
                                                 </div>
                                             ))}
                                         </div>

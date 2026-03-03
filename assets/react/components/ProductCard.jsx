@@ -41,9 +41,9 @@ export function ProductCard({ product, onAddToCart, onClick }) {
                     <p className="text-sm text-slate-400 line-clamp-2 mt-1" title={product.description}>{product.description}</p>
                 )}
                 <p className="flex items-center gap-2 mt-1">
-                    <span className="text-lg font-bold text-primary">${product.price.toFixed(2)}</span>
+                    <span className="text-lg font-bold text-primary">{product.price.toFixed(2)}€</span>
                     {product.originalPrice && (
-                        <span className="text-sm font-normal text-slate-500 line-through">${product.originalPrice.toFixed(2)}</span>
+                        <span className="text-sm font-normal text-slate-500 line-through">{product.originalPrice.toFixed(2)}€</span>
                     )}
                 </p>
             </div>
