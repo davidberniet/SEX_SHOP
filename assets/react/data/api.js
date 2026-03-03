@@ -32,3 +32,32 @@ export async function fetchCategories() {
         return ['Todos'];
     }
 }
+
+export async function createOrder(items) {
+    try {
+        const response = await fetch('/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to create order');
+        }
+        return data;
+    } catch (error) {
+        console.error('Error creating order:', error);
+        return { error: error.message };
+    }
+}
+
+export async function fetchMyOrders() {
+    try {
+        const response = await fetch('/api/orders/me');
+        if (!response.ok) throw new Error('Failed to fetch orders');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        return [];
+    }
+}

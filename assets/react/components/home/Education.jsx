@@ -5,32 +5,32 @@ const Education = () => {
         <section className="mt-16 rounded-xl bg-surface-dark px-6 py-12 md:px-12">
             <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
                 <div>
-                    <h2 className="mb-4 text-3xl font-bold tracking-tight text-white">Pleasure with Confidence</h2>
+                    <h2 className="mb-4 text-3xl font-bold tracking-tight text-white">Placer con Confianza</h2>
                     <p className="mb-6 text-slate-300">
-                        We believe sexual wellness is a vital part of a healthy lifestyle. Our products are body-safe, curated by experts, and delivered with the utmost discretion.
+                        Creemos que el bienestar sexual es una parte vital de un estilo de vida saludable. Nuestros productos son seguros para el cuerpo, seleccionados por expertos y entregados con la máxima discreción.
                     </p>
                     <ul className="mb-8 space-y-4">
                         <li className="flex items-start gap-3">
                             <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
                                 <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>check</span>
                             </span>
-                            <span className="text-sm text-slate-300"><strong>100% Body-Safe Materials:</strong> Medical grade silicone and free from phthalates.</span>
+                            <span className="text-sm text-slate-300"><strong>100% Materiales Seguros para el Cuerpo:</strong> Silicona de grado médico y libre de ftalatos.</span>
                         </li>
                         <li className="flex items-start gap-3">
                             <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
                                 <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>check</span>
                             </span>
-                            <span className="text-sm text-slate-300"><strong>Discrete Packaging:</strong> Plain boxes with no branding on the outside.</span>
+                            <span className="text-sm text-slate-300"><strong>Empaquetado Discreto:</strong> Cajas sencillas sin marcas en el exterior.</span>
                         </li>
                         <li className="flex items-start gap-3">
                             <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
                                 <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>check</span>
                             </span>
-                            <span className="text-sm text-slate-300"><strong>Expert Guides:</strong> Educational resources to help you explore safely.</span>
+                            <span className="text-sm text-slate-300"><strong>Guías de Expertos:</strong> Recursos educativos para ayudarte a explorar con seguridad.</span>
                         </li>
                     </ul>
                     <a className="inline-flex items-center gap-2 font-bold text-primary hover:underline cursor-pointer" onClick={(e) => e.preventDefault()}>
-                        Read our Wellness Guide
+                        Lee nuestra Guía de Bienestar
                         <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
                     </a>
                 </div>

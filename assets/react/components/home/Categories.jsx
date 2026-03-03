@@ -4,9 +4,9 @@ const Categories = () => {
     return (
         <section className="mt-16">
             <div className="flex items-center justify-between px-2 mb-6">
-                <h2 className="text-2xl font-bold tracking-tight text-white">Featured Categories</h2>
+                <h2 className="text-2xl font-bold tracking-tight text-white">Categorías Destacadas</h2>
                 <a className="group flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 cursor-pointer" onClick={(e) => e.preventDefault()}>
-                    View All
+                    Ver Todo
                     <span className="material-symbols-outlined transition-transform group-hover:translate-x-1" style={{ fontSize: '18px' }}>arrow_forward</span>
                 </a>
             </div>
@@ -22,7 +22,7 @@ const Categories = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                     <div className="absolute bottom-0 p-6">
                         <p className="text-xs font-semibold uppercase tracking-wider text-primary/90">Premium</p>
-                        <h3 className="text-xl font-bold text-white">Luxury Toys</h3>
+                        <h3 className="text-xl font-bold text-white">Juguetes de Lujo</h3>
                     </div>
                 </a>
 
@@ -35,8 +35,8 @@ const Categories = () => {
                     ></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                     <div className="absolute bottom-0 p-6">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-primary/90">Apparel</p>
-                        <h3 className="text-xl font-bold text-white">Fine Lingerie</h3>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-primary/90">Ropa</p>
+                        <h3 className="text-xl font-bold text-white">Lencería Fina</h3>
                     </div>
                 </a>
 
@@ -49,8 +49,8 @@ const Categories = () => {
                     ></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                     <div className="absolute bottom-0 p-6">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-primary/90">Self-Care</p>
-                        <h3 className="text-xl font-bold text-white">Sexual Wellness</h3>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-primary/90">Cuidado Personal</p>
+                        <h3 className="text-xl font-bold text-white">Bienestar Sexual</h3>
                     </div>
                 </a>
             </div>

@@ -22,7 +22,7 @@ const Bestsellers = ({ onNavigate }) => {
     return (
         <section className="mt-16">
             <div className="flex items-center justify-between px-2 mb-6">
-                <h2 className="text-2xl font-bold tracking-tight text-white">Bestsellers</h2>
+                <h2 className="text-2xl font-bold tracking-tight text-white">Los Más Vendidos</h2>
                 <div className="flex gap-2">
                     <button className="flex size-8 items-center justify-center rounded-full bg-surface-dark text-slate-300 hover:bg-slate-700 hover:text-white">
                         <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>chevron_left</span>
@@ -36,7 +36,7 @@ const Bestsellers = ({ onNavigate }) => {
             {loading ? (
                 <div className="text-center py-10 text-slate-400">
                     <span className="material-symbols-outlined animate-spin text-primary block mx-auto mb-2" style={{ fontSize: '32px' }}>sync</span>
-                    Cargando bestsellers...
+                    Cargando los más vendidos...
                 </div>
             ) : (
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-4">

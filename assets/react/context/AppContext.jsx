@@ -2,7 +2,8 @@ import React, { createContext, useContext, useState } from 'react';
 
 const AppContext = createContext();
 
-export function AppProvider({ children }) {
+export function AppProvider({ children, initialUserData = null }) {
+    const [user, setUser] = useState(initialUserData);
     const [cartItems, setCartItems] = useState([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -33,10 +34,13 @@ export function AppProvider({ children }) {
         ));
     };
 
+    const clearCart = () => setCartItems([]);
+
     return (
         <AppContext.Provider value={{
+            user, setUser,
             cartItems, cartCount, cartTotal,
-            addToCart, removeFromCart, updateQuantity,
+            addToCart, removeFromCart, updateQuantity, clearCart,
             isCartOpen, setIsCartOpen
         }}>
             {children}

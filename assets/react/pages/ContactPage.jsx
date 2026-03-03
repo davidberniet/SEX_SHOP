@@ -1,6 +1,9 @@
 import React from 'react';
+import { useApp } from '../context/AppContext';
 
 export function ContactPage() {
+    const { user } = useApp();
+
     return (
         <div className="container mx-auto px-4 py-12 lg:py-20 max-w-[800px]">
             <div className="text-center mb-12">
@@ -16,7 +19,7 @@ export function ContactPage() {
                         <span className="material-symbols-outlined">mail</span>
                     </div>
                     <h3 className="font-bold text-white mb-1">Email</h3>
-                    <p className="text-sm text-slate-400">hello@velvetvine.com</p>
+                    <p className="text-sm text-slate-400">hello@lujusex.com</p>
                 </div>
                 <div className="bg-surface-dark border border-border-dark rounded-2xl p-6 text-center hover:border-primary/50 transition-colors">
                     <div className="size-12 rounded-full bg-primary/20 text-primary mx-auto flex items-center justify-center mb-4">
@@ -40,11 +43,11 @@ export function ContactPage() {
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                             <label className="text-xs font-bold text-slate-300 uppercase tracking-wide">Tu Nombre</label>
-                            <input type="text" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Juan Perez" />
+                            <input type="text" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Juan Perez" defaultValue={user?.nombre || ''} />
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs font-bold text-slate-300 uppercase tracking-wide">Tu Correo</label>
-                            <input type="email" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="juan@ejemplo.com" />
+                            <input type="email" className="w-full bg-background-dark border border-border-dark rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="juan@ejemplo.com" defaultValue={user?.email || ''} />
                         </div>
                     </div>
 

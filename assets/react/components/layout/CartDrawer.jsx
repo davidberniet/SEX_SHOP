@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { createOrder } from '../../data/api';
 
-export function CartDrawer() {
+export function CartDrawer({ onNavigate }) {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const {
         isCartOpen, setIsCartOpen,
-        cartItems, removeFromCart, updateQuantity,
+        cartItems, removeFromCart, updateQuantity, clearCart,
         cartTotal
     } = useApp();
+
+    const handleCheckout = async () => {
+        setIsSubmitting(true);
+        const result = await createOrder(cartItems);
+        setIsSubmitting(false);
+
+        if (result && !result.error) {
+            clearCart();
+            setIsCartOpen(false);
+            if (onNavigate) {
+                onNavigate('profile', { tab: 'orders' });
+            }
+        } else {
+            alert('Hubo un error al procesar el pedido: ' + (result?.error || 'Error desconocido'));
+        }
+    };
 
     if (!isCartOpen) return null;
 
@@ -95,9 +113,15 @@ export function CartDrawer() {
                             <span className="font-medium text-slate-300">Total</span>
                             <span className="font-bold text-white text-2xl">${cartTotal.toFixed(2)}</span>
                         </div>
-                        <button className="w-full rounded-lg bg-white py-4 text-sm font-bold text-background-dark hover:bg-slate-200 transition-colors shadow-lg shadow-white/10 flex justify-center items-center gap-2">
-                            Proceder al Pago
-                            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_forward</span>
+                        <button
+                            onClick={handleCheckout}
+                            disabled={isSubmitting}
+                            className="w-full rounded-lg bg-white py-4 text-sm font-bold text-background-dark hover:bg-slate-200 transition-colors shadow-lg shadow-white/10 flex justify-center items-center gap-2 disabled:opacity-50"
+                        >
+                            {isSubmitting ? 'Procesando...' : 'Pedir'}
+                            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
+                                {isSubmitting ? 'sync' : 'check_circle'}
+                            </span>
                         </button>
                     </div>
                 )}

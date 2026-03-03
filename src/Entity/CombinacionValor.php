@@ -17,7 +17,7 @@ class CombinacionValor
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $notas = null;
 
-    #[ORM\ManyToOne(inversedBy: 'valoresCombinacion')]
+    #[ORM\ManyToOne(inversedBy: 'combinacionValores')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ProductoCombinacion $combinacion = null;
 

@@ -102,8 +102,9 @@ export function ProductPage({ productId, onBack }) {
                                 <span className="text-lg font-medium text-slate-500 line-through mb-1">${product.originalPrice.toFixed(2)}</span>
                             )}
                         </div>
-                        <p className="text-slate-300 text-lg leading-relaxed">
-                            {product.description || "Experimenta el pináculo del placer y la sofisticación. Diseñado con materiales de la más alta calidad para ofrecer sensaciones exquisitas, este producto redefinirá tus momentos de intimidad con un toque de elegancia absoluta."}
+
+                        <p className="text-slate-300 text-lg leading-relaxed whitespace-pre-wrap">
+                            {product.description || "Este producto no tiene una descripción adicional."}
                         </p>
                     </div>
 

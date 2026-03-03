@@ -14,16 +14,42 @@ import { CatalogPage } from './react/pages/CatalogPage';
 import { ProductPage } from './react/pages/ProductPage';
 import { ProfilePage } from './react/pages/ProfilePage';
 import { ContactPage } from './react/pages/ContactPage';
+import { AboutPage } from './react/pages/AboutPage';
 import { CartDrawer } from './react/components/layout/CartDrawer';
 import { AppProvider } from './react/context/AppContext';
-import { useState } from 'react';
+import { useApp } from './react/context/AppContext';
+import { useState, useEffect } from 'react';
 
-function App() {
-    const [route, setRoute] = useState('home');
-    const [routeParams, setRouteParams] = useState(null);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+function ProfileRoute({ routeParams }) {
+    const { user } = useApp();
+    useEffect(() => {
+        if (!user) {
+            window.location.href = '/login';
+        }
+    }, [user]);
+
+    if (!user) return null;
+    return <ProfilePage initialTab={routeParams?.tab || 'profile'} />;
+}
+
+function App({ initialUserData }) {
+    const [route, setRoute] = useState(() => sessionStorage.getItem('currentRoute') || 'home');
+    const [routeParams, setRouteParams] = useState(() => {
+        const stored = sessionStorage.getItem('currentRouteParams');
+        return stored ? JSON.parse(stored) : null;
+    });
+    const [selectedProduct, setSelectedProduct] = useState(() => {
+        const stored = sessionStorage.getItem('currentSelectedProduct');
+        return stored ? JSON.parse(stored) : null;
+    });
 
     const navigate = (newRoute, params = null) => {
+        sessionStorage.setItem('currentRoute', newRoute);
+        sessionStorage.setItem('currentRouteParams', JSON.stringify(params));
+        if (newRoute === 'product' && params) {
+            sessionStorage.setItem('currentSelectedProduct', JSON.stringify(params));
+        }
+
         setRoute(newRoute);
         setRouteParams(params);
         if (newRoute === 'product' && params) {
@@ -33,7 +59,7 @@ function App() {
     };
 
     return (
-        <AppProvider>
+        <AppProvider initialUserData={initialUserData}>
             <Header onNavigate={navigate} />
             <main className="flex-1">
                 {route === 'home' && (
@@ -52,14 +78,17 @@ function App() {
                     <ProductPage productId={selectedProduct} onBack={() => navigate('catalog')} />
                 )}
                 {route === 'profile' && (
-                    <ProfilePage />
+                    <ProfileRoute routeParams={routeParams} />
                 )}
                 {route === 'contact' && (
                     <ContactPage />
                 )}
+                {route === 'about' && (
+                    <AboutPage />
+                )}
             </main>
             <Footer />
-            <CartDrawer />
+            <CartDrawer onNavigate={navigate} />
         </AppProvider>
     );
 }
@@ -69,8 +98,18 @@ console.log('Script de vite/react cargado, montando aplicación...');
 const rootElement = document.getElementById('react-app');
 
 if (rootElement) {
+    const userDataStr = rootElement.getAttribute('data-user');
+    let userData = null;
+    if (userDataStr) {
+        try {
+            userData = JSON.parse(userDataStr);
+        } catch (e) {
+            console.error('Error parsing user data:', e);
+        }
+    }
+
     const root = createRoot(rootElement);
-    root.render(<App />);
+    root.render(<App initialUserData={userData} />);
     console.log('React montado con éxito en #react-app');
 } else {
     console.error('ERROR CRÍTICO: No se encontró el elemento #react-app en el DOM');
